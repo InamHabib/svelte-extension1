@@ -30,6 +30,7 @@ function serve() {
 
 export default {
 	input: 'src/main.js',
+	external: ['./index.scss'],
 	
 	output: {
 		sourcemap: true,
@@ -39,6 +40,7 @@ export default {
 	},
 	plugins: [
 		svelte({
+			emitCss:true,
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production
