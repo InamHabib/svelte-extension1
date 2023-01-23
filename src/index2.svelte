@@ -5,7 +5,7 @@
 
 <body>
     <div class="index2-container">
-        <span>passwordless app</span>
+        <span style="font-size:40px">passwordless app</span>
     </div>
     
 </body>
