@@ -2,15 +2,29 @@ body{
     height: 500px;
     width: 350px;
     background-color: white !important ; 
-    
-    
-    
-    
-}
+    color: black !important;
 
-.page-container{
-    height: 500px;
-    width: 350px;
+    .page-container{
+        height: 500px;
+        width: 350px;
+        padding: 1rem;
+        .bx--row{
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+        }
+        .createwallet-container{
+            display: flex;
+            flex-direction: column;
+           .bx--form-item{
+            align-items: center;
+            .bx--file--label{
+                color: #000;
+            }
+            .bx--label-description{
+                color: #000;
+            }
+           }
 
-    
+        }
+    }    
 }
