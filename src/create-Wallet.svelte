@@ -10,7 +10,7 @@
       FileUploader,
     } from "carbon-components-svelte";
 
-    import Add from "carbon-icons-svelte"
+    import {Add} from "carbon-icons-svelte"
 
 </script>
 
@@ -34,18 +34,7 @@
           />
         </Column>
   </Row>
-  <Row>
-    <Add />
-    <Column>
-    Yes,let's get set up!
-    </Column>
-    <Column>
-    This will create a new wallet and secret recovery phrase
-    </Column>
-    
-   <Button>Create a wallet</Button>
-  </Row>
-
+ 
         
     </div>
     
