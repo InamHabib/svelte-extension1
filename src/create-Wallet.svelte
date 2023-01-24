@@ -12,22 +12,24 @@
 
     import {
         Add,
-        Download,
+        Upload,
     
     } from "carbon-icons-svelte"
 
 </script>
 
 
-    <div class="createwallet-container">
+<div class="createwallet-container">
         <div class="title-container">
             <span>Welcome to
                 Authnull Wallet </span>
             
         </div>
-        <Row>
+    
           <Row class="import-wallet-container">
-          <Row><Download class="icon-size" /></Row>
+          <Row class="upload-icon">
+            <Upload />
+        </Row>
             <Row>
                 
               <Column>
@@ -43,7 +45,10 @@
             </Row>
         </Row>
         <Row class="create-wallet-button">
-  
+          <Column>  
+            <Row class="add-icon"><Add />
+            
+            </Row>
             <Row>
               <Column class="font-size">
                <p>Yes, let's get set up!</p>
@@ -57,12 +62,12 @@
             <Row>
               <Button type="primary">Create a wallet </Button>
             </Row>
-          </Row>
-        </Row>  
+          </Column>
+    </Row>  
 
        
     
 
  
         
-    </div>
+</div>
