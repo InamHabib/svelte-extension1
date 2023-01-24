@@ -10,20 +10,26 @@
       FileUploader,
     } from "carbon-components-svelte";
 
-    import {Add} from "carbon-icons-svelte"
+    import {
+        Add,
+        Download,
+    
+    } from "carbon-icons-svelte"
 
 </script>
 
 
     <div class="createwallet-container">
         <div class="title-container">
-            <h1>Wellcome to
-                Authnull Wallet
-            </h1>
+            <span>Welcome to
+                Authnull Wallet </span>
+            
         </div>
         <Row>
           <Row class="import-wallet-container">
+          <Row><Download class="icon-size" /></Row>
             <Row>
+                
               <Column>
                 <FileUploader
                 multiple
@@ -35,48 +41,27 @@
               />
               </Column>
             </Row>
-            <Row>
-              <Column>
-               <p>No, I already have a secret recovery phrase</p>
-              </Column>
-            </Row>
-            <Row>
-              <Column>
-               <p>Import your existing wallet using secret recovery phrase</p>
-              </Column>
-            </Row>
-            <Row>
-              <Button type="primary">Import Wallet</Button>
-            </Row>
-          </Row>
-          <Row class="import-wallet-container">
-            <!-- <Row>
-              <Column>
-                <FileUploader
-                multiple
-                labelTitle="No,I Already have a Secret Recovery Phrase"
-                buttonLabel="Import Wallet"
-                labelDescription="Import your existing wallet using a secret recovery phrase"
-                accept={[".csv", ".jpeg"]}
-                status="complete"
-              />
-              </Column>
-            </Row> -->
-            <Row>
-              <Column>
-               <p>No, I already have a secret recovery phrase</p>
-              </Column>
-            </Row>
-            <Row>
-              <Column>
-               <p>Import your existing wallet using secret recovery phrase</p>
-              </Column>
-            </Row>
-            <Row>
-              <Button type="primary">Create Wallet</Button>
-            </Row>
-          </Row>
         </Row>
+        <Row class="create-wallet-button">
+  
+            <Row>
+              <Column class="font-size">
+               <p>Yes, let's get set up!</p>
+              </Column>
+            </Row>
+            <Row>
+              <Column class="font-weight-wallet">
+               <p>This will create a new wallet and secret recovery phrase</p>
+              </Column>
+            </Row>
+            <Row>
+              <Button type="primary">Create a wallet </Button>
+            </Row>
+          </Row>
+        </Row>  
+
+       
+    
 
  
         

@@ -7,5 +7,4 @@
 
 <div class="page-container">
     <CreateWallet/>
-    <Index3/>
 </div>
