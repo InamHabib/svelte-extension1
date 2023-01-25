@@ -5,7 +5,7 @@ body{
     color: black !important;
 
     .page-container{
-        height: 500px;
+        height: 550px;
         width: 350px;
         padding: 1rem;
         .bx--row{
@@ -63,6 +63,11 @@ body{
                 border-radius: 8px;
                 margin-bottom: 0.3rem;
                 padding-top: 0.5rem ;
+                .bx--file-container{
+                    .bx--file__selected-file{
+                        background-color: white !important;
+                    }
+                }
 
                 label{
                     padding: 0.5rem;
