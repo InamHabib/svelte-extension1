@@ -19,7 +19,7 @@
 
     <div class="list-of-credentials">
         <Row>
-            <Column>
+            <Column class="search-bar">
             <Search  size="sm" /> </Column>
         </Row>
         <Row>
