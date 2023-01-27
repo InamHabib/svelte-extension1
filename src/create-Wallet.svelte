@@ -22,8 +22,8 @@
 
 <div class="createwallet-container">
         <div class="title-container">
-            <span>Welcome to
-                Authnull Wallet </span>
+          <h1> Welcome to
+                Authnull Wallet </h1>
             
         </div>
     

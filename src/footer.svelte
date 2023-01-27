@@ -21,8 +21,7 @@
        AppConnectivity,
        CloudDownload,
       }  from "carbon-icons-svelte"
- 
-  
+      
   </script>
   
   
@@ -31,12 +30,11 @@
           
                 <Row class="footer-container">
                 <Row class="footer-tab tab-background">
-                  <Column on:click={()=>localStorage.setItem('page', 'createWallet')} id="sub-tab1"><Home/></Column>
-                  <Column on:click={()=>localStorage.setItem('page', 'listCredential')} id="sub-tab1"><Password/></Column>
-                  <Column on:click={()=>localStorage.setItem('page', 'receiveCredential')} id="sub-tab1"><CloudDownload/></Column>
+                  <div on:click={()=>console.log('Inam')} class="sub-tab1" id="list-cred"><Password/></div>
+                  <div on:click={()=>localStorage.setItem('page', 'receiveCredential')} class="sub-tab1" id="receive-cred"><CloudDownload/></div>
                
-                  <Column on:click={()=>localStorage.setItem('page', 'activity')} id="sub-tab1"><AppConnectivity/></Column>
-                  <Column on:click={()=>localStorage.setItem('page', 'notification')} id="sub-tab1"><Notification/></Column>
+                  <div on:click={()=>localStorage.setItem('page', 'activity')} class="sub-tab1" id="activity"><AppConnectivity/></div>
+                  <div on:click={()=>localStorage.setItem('page', 'notification')} class="sub-tab1" id="notification"><Notification/></div>
 
                   
                 </Row>

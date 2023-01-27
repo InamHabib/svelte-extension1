@@ -37,12 +37,12 @@ body{
                  border: 2px solid #cccc;
                  border-radius: 10px;
                  padding-left: 0 !important;
-                 .bx--row
             
-                #sub-tab1{
+                .sub-tab1{
                     width: 53px;
                     height: 53px;
                     display: flex;
+                    cursor: pointer;
                     flex-direction: column;
                     justify-content: space-evenly;
                     color: #007AFF;
@@ -58,7 +58,7 @@ body{
                         font-weight: 500;
                     }
                 
-                #sub-tab2{
+                .sub-tab2{
                     h4{
                         font-size: 14px;
                         font-weight: 450;

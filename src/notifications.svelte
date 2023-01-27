@@ -31,55 +31,49 @@
                            <p>Requested access to Password</p>                
                    </Column>
                  </Row>
-                 <Row class="data-tabs tab-background">
-                   <Column id="sub-tab1"></Column>
-                   <Column id="sub-tab2"><h4>Server Group #1 </h4>
-                        
-                           <p>requested access to SSH Keys</p>                
-                   </Column>
-                 </Row>
-                 <Row class="data-tabs">
-                   <Column id="sub-tab1"></Column>
-                   <Column id="sub-tab2"><h4>Server Group #1 </h4>
-                           
-                           <p>OTP 45470</p>                
-                   </Column>
-                 </Row>
-                 <Row class="data-tabs">
-                   <Column id="sub-tab1"></Column>
-                   <Column id="sub-tab2"><h4>Server Group #1 </h4>
-                         
-                           <p>OTP 32784</p>                
-                   </Column>
-                 </Row>
-                 <Row class="data-tabs">
-                   <Column id="sub-tab1"></Column>
-                   <Column id="sub-tab2"><h4>Server Group #1 </h4>
-                           
-                           <p>requested access to SSH Keys</p>                
-                   </Column>
-                 </Row>
-                 <Row class="data-tabs">
-                   <Column id="sub-tab1"></Column>
-                   <Column id="sub-tab2"><h4>Server Group #1 </h4>
-                          
-                           <p>requested access to Password</p>                
-                   </Column>
-                 </Row>
-                 <Row class="data-tabs">
-                   <Column id="sub-tab1"></Column>
-                   <Column id="sub-tab2"><h4>Server Group #1</h4>
-                          
-                           <p>requested access to SSH Keys</p>                
-                   </Column>
-                 </Row>
-                 <Row class="data-tabs">
-                   <Column id="sub-tab1"></Column>
-                   <Column id="sub-tab2"><h4>Server Group #1 </h4>
-                           
-                           <p>OTP 00894</p>                
-                   </Column>
-                 </Row>
+                 <Row class="notification-tab tab-background">
+                  <Column id="sub-tab1"></Column>
+                  <Column id="sub-tab2"><h4>Server Group #1 </h4>
+                       
+                          <p>requested access to SSH Keys</p>                
+                  </Column>
+                </Row>
+                <Row class="notification-tab tab-background">
+                  <Column id="sub-tab1"></Column>
+                  <Column id="sub-tab2"><h4>Server Group #1 </h4>
+                       
+                          <p>requested access to SSH Keys</p>                
+                  </Column>
+                </Row>
+                <Row class="notification-tab tab-background">
+                  <Column id="sub-tab1"></Column>
+                  <Column id="sub-tab2"><h4>Server Group #1 </h4>
+                       
+                          <p>requested access to SSH Keys</p>                
+                  </Column>
+                </Row>
+                <Row class="notification-tab tab-background">
+                  <Column id="sub-tab1"></Column>
+                  <Column id="sub-tab2"><h4>Server Group #1 </h4>
+                       
+                          <p>requested access to SSH Keys</p>                
+                  </Column>
+                </Row>
+                <Row class="notification-tab tab-background">
+                  <Column id="sub-tab1"></Column>
+                  <Column id="sub-tab2"><h4>Server Group #1 </h4>
+                       
+                          <p>requested access to SSH Keys</p>                
+                  </Column>
+                </Row>
+                <Row class="notification-tab tab-background">
+                  <Column id="sub-tab1"></Column>
+                  <Column id="sub-tab2"><h4>Server Group #1 </h4>
+                       
+                          <p>requested access to SSH Keys</p>                
+                  </Column>
+                </Row>
+
    
             </Row>
            
