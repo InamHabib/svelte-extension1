@@ -1,15 +1,18 @@
 body{
-    height: 500px;
+    height: 576px;
     width: 350px;
     background-color: white !important ; 
     color: black !important;
      
     .page-container{
-        height: 550px;
+        height: 576px;
         width: 350px;
         padding: 1rem;
+        display: flex;
+        flex-direction: column;
          
-     .list-of-credentials{
+     .activity-container{
+        margin-bottom: 10px;
         .top-section{
             height: 160px;
         }
@@ -27,12 +30,13 @@ body{
         .data-container{
             margin-top: 20px;
             width: 100%;
-            height: 400px;
+            height: 323px;
             overflow: auto;
         
             .data-tabs{
                 margin-bottom: 10px;
                 padding: 1rem;
+                padding-left: 0 !important;
                 #sub-tab1{
                     width: 103px;
                     height: 73px;

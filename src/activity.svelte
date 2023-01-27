@@ -1,4 +1,5 @@
 <script>
+  import "./styles/activity.scss";
     import {
          Button,
          Link,
@@ -17,7 +18,7 @@
    
    
    
-       <div class="list-of-credentials">
+       <div class="activity-container">
         <Row class="top-section">
            <Row>
                <Column class="title-container">

@@ -1,4 +1,5 @@
 <script>
+  import "./styles/list-of-Credentials.scss";
  import {
       Button,
       Link,

@@ -1,4 +1,5 @@
 <script>
+      import "./styles/notifications.scss";
     import {
          Button,
          Link,
@@ -17,14 +18,14 @@
    
    
    
-       <div class="list-of-credentials">
+       <div class="notifications-container">
            <Row>
                <Column class="title-container">
                <h2>Notifications</h2>
                </Column>
            </Row>
                  <Row class="data-container">
-                 <Row class="data-tabs tab-background">
+                 <Row class="notification-tab tab-background">
                    <Column id="sub-tab1"></Column>
                    <Column id="sub-tab2"><h4>Server Group #1 </h4>
                            <p>Requested access to Password</p>                
