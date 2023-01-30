@@ -6,6 +6,7 @@ import ReceivingCredentials from "./receiving-Credentials.svelte";
 import Activity from "./activity.svelte";
 import Notifications from "./notifications.svelte";
 import Footer from "./footer.svelte";
+import LoginSignup from "./login-Signup.svelte";
 import {
     getContext,
     onMount
@@ -31,6 +32,7 @@ import {
     Notification,
     AppConnectivity,
     CloudDownload,
+    Login,
 } from "carbon-icons-svelte";
 let page = 'createWallet';
 </script>
@@ -46,6 +48,8 @@ let page = 'createWallet';
                 <Activity/>
                     {:else if page === 'notification'}
                     <Notifications/>
+                    {:else if page === 'loginSignup'}
+                    <LoginSignup/>
                         {/if}
                         <div class="footer">
 
@@ -56,6 +60,7 @@ let page = 'createWallet';
 
                                             <div on:click={()=>page='activity'} class="sub-tab1 bx--col" id="activity"><AppConnectivity/></div>
                                                 <div on:click={()=>page='notification'} class="sub-tab1 bx--col" id="notification"><Notification/></div>
+                                                <div on:click={()=>page='loginSignup'} class="sub-tab1 bx--col" id="loginSignup"><Login/></div>
 
                                                     </Row>
 
