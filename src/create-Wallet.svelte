@@ -16,6 +16,7 @@ import {
     Upload,
 
 } from "carbon-icons-svelte"
+
 </script>
 
 <div class="createwallet-container">
@@ -65,3 +66,4 @@ import {
                 </Row>
 
                 </div>
+                

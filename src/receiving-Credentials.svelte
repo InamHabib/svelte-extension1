@@ -18,6 +18,11 @@ import {
 
 <div class="receiving-credentials">
 
+  <Row>
+    <Column class="search-bar">
+    <Search  size="sm" /> </Column>
+</Row>
+
     <Row>
         <Column class="title-container">
         <h1>Available Credentials</h1>
