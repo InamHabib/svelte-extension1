@@ -1,17 +1,13 @@
 <script>
     import { onMount } from "svelte";
-function notification() {
-    chrome.notifications.create('NOTFICATION', {
-        type: 'basic',
-        iconUrl: 'my-extension/images/firebase.png',
-        title: 'authnull wallet',
-        message: 'this is a test notification',
-        priority: 2
-    })
-}
-onMount(async () => {
-		notification();
-        console.log("notification done")
+    onMount(async () => {
+    Notification.requestPermission().then((result) => {
+  console.log(result);
+  const img = '';
+const text = `HEY! You have a new authnull wallet notification.`;
+const notification = new Notification('Authnull wallet', { body: text, icon: img });
+
+});
 	});
 </script>
 

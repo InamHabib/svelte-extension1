@@ -14,7 +14,6 @@ import {
     TabContent,
 } from "carbon-components-svelte";
 
-
 </script>
 
 <div class="list-of-credentials">
