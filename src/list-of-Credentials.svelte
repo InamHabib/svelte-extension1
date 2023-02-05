@@ -14,6 +14,7 @@ import {
     TabContent,
 } from "carbon-components-svelte";
 
+let selected="All"
 </script>
 
 <div class="list-of-credentials">
@@ -27,15 +28,15 @@ import {
         </Column>
     </Row>
     <Row class="tabs-container">
-        <Button>All</Button>
-        <Button>Server</Button>
-        <Button>Groups</Button>
-        <Button>Apps</Button>
+        <Button on:click={() => selected="All"} >All</Button>
+        <Button on:click={() => selected="Server"} >Server</Button>
+        <Button on:click={() => selected="Groups"} >Groups</Button>
+        <Button on:click={() => selected="Apps"}>Apps</Button>
     </Row>
     <Row>
         <Column class="title-2"><h2>Popular</h2></Column>
     </Row>
-
+{#if selected=="All"}
     <Row class="data-container">
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
@@ -95,5 +96,194 @@ import {
         </Row>
 
     </Row>
+    {/if}
+       
+    {#if selected=="Server"}
+    <Row class="data-container">
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #2</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+
+    </Row>
+    {/if}
+
+    {#if selected=="Groups"}
+    <Row class="data-container">
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #3</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+
+    </Row>
+    {/if}
+
+    {#if selected=="Apps"}
+    <Row class="data-container">
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #4</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+        <Row class="data-tabs">
+            <Column id="sub-tab1"></Column>
+            <Column id="sub-tab2"><h4>Server Group #1</h4>
+            <span>SSH Keys</span>
+            <p>Rotated at yesterday 5pm PST</p>
+            </Column>
+        </Row>
+
+    </Row>
+    {/if}
+
+
 
 </div>
