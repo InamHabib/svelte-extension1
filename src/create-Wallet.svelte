@@ -1,15 +1,16 @@
 <script>
-import "./styles/index.scss";
+import "./styles/index.scss"
 import {
     Button,
-    Link,
     Loading,
     TextArea,
     TextInput,
     Row,
     Column,
     FileUploader,
+    
 } from "carbon-components-svelte";
+
 
 import {
     Add,

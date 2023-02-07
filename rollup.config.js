@@ -6,6 +6,7 @@ import { terser } from 'rollup-plugin-terser';
 import autoPreprocess from 'svelte-preprocess';
 import scss from 'rollup-plugin-scss'
 
+
 const production = !process.env.ROLLUP_WATCH;
 
 function serve() {
@@ -31,6 +32,7 @@ function serve() {
 
 export default {
 	input: 'src/main.js',
+	external: ['navigate'],
 	output: {
 		sourcemap: true,
 		format: 'iife',

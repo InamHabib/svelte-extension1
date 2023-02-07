@@ -8,6 +8,8 @@ import Notifications from "./notifications.svelte";
 import Footer from "./footer.svelte";
 import LoginSignup from "./login-Signup.svelte";
 import Message from "./message.svelte";
+import WalletRegistration from "./wallet-Registration.svelte";
+import Backup from "./backup.svelte";
 import {
     getContext,
     onMount
@@ -15,7 +17,6 @@ import {
 import "./styles/footer.scss";
 import {
     Button,
-    Link,
     Loading,
     TextArea,
     TextInput,
@@ -35,6 +36,7 @@ import {
     CloudDownload,
     Login,
     MessageQueue,
+    DataBackup ,
 } from "carbon-icons-svelte";
 let page = 'createWallet';
 </script>
@@ -55,6 +57,10 @@ let page = 'createWallet';
                     <LoginSignup/>
                     {:else if page === 'message'}
                     <Message/>    
+                    {:else if page === 'walletRegistration'}
+                    <WalletRegistration/>
+                    {:else if page === 'backup'}
+                    <Backup/>
                     {/if}
                         <div class="footer">
 
@@ -67,7 +73,9 @@ let page = 'createWallet';
                                                 <div on:click={()=>page='notification'} class="sub-tab1 bx--col" id="notification"><Notification/></div>
                                                 <div on:click={()=>page='loginSignup'} class="sub-tab1 bx--col" id="loginSignup"><Login/></div>
                                                 <div on:click={()=>page='message'} class="sub-tab1 bx--col" id="send"><MessageQueue/></div>
-                                                    </Row>
+                                                <div on:click={()=>page='walletRegistration'} class="sub-tab1 bx--col" id="register"><MessageQueue/></div>    
+                                                <div on:click={()=>page='backup'} class="sub-tab1 bx--col" id="register"><DataBackup/></div>
+                                            </Row>
 
                                                     </Row>
 
