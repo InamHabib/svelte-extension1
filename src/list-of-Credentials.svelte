@@ -40,58 +40,59 @@ let selected="All"
     <Row class="data-container">
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server 1
+            </h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server 1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server 1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server 1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server 1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server 1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server 1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server 1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
 
@@ -102,58 +103,58 @@ let selected="All"
     <Row class="data-container">
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #2</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server 2</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
 
@@ -164,58 +165,58 @@ let selected="All"
     <Row class="data-container">
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #3</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server 3</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
 
@@ -226,63 +227,68 @@ let selected="All"
     <Row class="data-container">
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #4</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server 4</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
         <Row class="data-tabs">
             <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Server Group #1</h4>
-            <span>SSH Keys</span>
-            <p>Rotated at yesterday 5pm PST</p>
+            <Column id="sub-tab2"><h4>Credential for Server1</h4>
+            <span>Credential type: SSH Keys </span>
+            <p>Issued at 5.45pm for Asif</p>
             </Column>
         </Row>
 
     </Row>
     {/if}
+
+    <Row  class= button-container>
+        <Column>
+        <Button type=primary>More</Button></Column>
+    </Row>
 
 
 

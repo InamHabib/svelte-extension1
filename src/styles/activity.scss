@@ -14,30 +14,38 @@ body{
      .activity-container{
         margin-bottom: 10px;
         height: 500px;
-        .top-section{
-            height: 160px;
+       
+        .title-container{
+            font-size: 17px;
+           font-weight: 700 !important;
+           padding-left: 0;
+          padding-right: 0;
+          margin-bottom: 15px;
+          h2{
+            font-size: 22px;
+            font-weight: 700;
+            font-family: inter;
+            font-style: normal;
+          }
         }
         .bx--row{
             margin-left: 0;
             margin-right: 0;
         }
-        .top-section{
-            background-color: rgb(242,242,247);
-            height: 160px;
-            margin-left: -1rem;
-            margin-right: -1rem;
-
-        }
+        
         .data-container{
             margin-top: 20px;
-            width: 100%;
-            height: 323px;
+            width: 330px;
+            height: 392px;
             overflow: auto;
+            padding-left: 2px;
         
             .data-tabs{
+                padding: 0.5rem;
+                padding-left: 8px !important;
+                box-shadow: rgb(0 0 0 / 12%) 1px 1px 6px, rgb(0 0 0 / 24%) 0px 1px 5px;
+                border-radius: 10px;
                 margin-bottom: 10px;
-                padding: 1rem;
-                padding-left: 0 !important;
                 #sub-tab1{
                     width: 103px;
                     height: 73px;
@@ -61,10 +69,9 @@ body{
                     }
                     span{
                         font-size: 12px;
-                        color: rgba(60, 60, 67, 0.6);
-                        font-family: inter;
+                        color: rgba(60, 60, 67, 84%);
                         font-style: normal;
-                        font-weight: 500;
+                        font-weight: 600;
                     }
                     p{
                         color: #007AFF;
@@ -88,38 +95,35 @@ body{
             margin-right: 20px;
             width: 225px;
             padding-bottom: 1rem;
-            margin-left: 1px;
+    
+
+        
 
             .bx--btn--primary{
-                font-size: 0.675rem;
+                font-size: 13px;
+                font-family: inter;
+                font-style: normal;
                 min-height: 20px;
-                background-color: rgb(230, 230, 230);
-                color: #908888;
-                border: none;
+                background-color: rgba(116, 116, 128, 0.09);
+                color: rgba(60, 60, 67, 0.7);
+                border: none !important ;
                 min-width: 50px;
                 min-height: 25px;
                 display: flex;
                 justify-content: center;
                 flex-direction: column;
                 border-radius: 10px;
-                font-weight: 600;
+                font-weight: 700;
                 padding: 0px;
             }
-        }
-        .bx--row{
-            .title-container{
-                margin-top: 0.3rem;
-                padding-bottom: 3px;
-                display: flex;
-                align-items: end;
-                padding-left: 9rem;
-    
-                h2{
-                    font-size: 1.5em;
-                    font-weight: 400;
-                }
+            .bx--btn--primary:focus{
+                background-color: rgba(0, 122, 255, 1);
+                color: white;
+                border:  rgba(0, 122, 255, 1);
             }
+
         }
+    
         
      }   
 
