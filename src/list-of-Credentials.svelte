@@ -285,10 +285,7 @@ let selected="All"
     </Row>
     {/if}
 
-    <Row  class= button-container>
-        <Column>
-        <Button type=primary>More</Button></Column>
-    </Row>
+   
 
 
 

@@ -10,6 +10,7 @@ import LoginSignup from "./login-Signup.svelte";
 import Message from "./message.svelte";
 import WalletRegistration from "./wallet-Registration.svelte";
 import Backup from "./backup.svelte";
+import ShareCredentials from "./share-Credentials.svelte";
 import {
     getContext,
     onMount
@@ -61,6 +62,8 @@ let page = 'createWallet';
                     <WalletRegistration/>
                     {:else if page === 'backup'}
                     <Backup/>
+                    {:else if page === 'ShareCredentials'}
+                    <ShareCredentials/>
                     {/if}
                         <div class="footer">
 
@@ -74,7 +77,8 @@ let page = 'createWallet';
                                                 <div on:click={()=>page='loginSignup'} class="sub-tab1 bx--col" id="loginSignup"><Login/></div>
                                                 <div on:click={()=>page='message'} class="sub-tab1 bx--col" id="send"><MessageQueue/></div>
                                                 <div on:click={()=>page='walletRegistration'} class="sub-tab1 bx--col" id="register"><MessageQueue/></div>    
-                                                <div on:click={()=>page='backup'} class="sub-tab1 bx--col" id="register"><DataBackup/></div>
+                                                <div on:click={()=>page='backup'} class="sub-tab1 bx--col" id="backup"><DataBackup/></div>
+                    
                                             </Row>
 
                                                     </Row>

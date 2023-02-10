@@ -31,6 +31,11 @@ let selected="All"
             <Button on:click={() => selected="Groups"} >Groups</Button>
             <Button on:click={() => selected="Apps"}>Apps</Button>
         </Row>
+        <Row>
+            <Column class="search-bar">
+            <Search  size="sm" /> </Column>
+        </Row>
+
     </Row>
     {#if selected=="All"}
     <Row class="data-container">
