@@ -16,6 +16,7 @@
         Upload,
     
     } from "carbon-icons-svelte"
+  import { goto } from "svelte-pathfinder";
     </script>
     
     <div class="login-container">
@@ -33,7 +34,7 @@
                     <Row class="signup-button">
                         <Column>
                         <Row>
-                            <Button type="primary">Signup </Button>
+                            <Button type="primary" on:click={()=>goto('/login/form')}>Signup </Button>
                         </Row>
                         </Column>
                     </Row>

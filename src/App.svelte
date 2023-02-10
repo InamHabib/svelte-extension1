@@ -1,4 +1,5 @@
 <script>
+import { pattern, goto } from 'svelte-pathfinder';
 import CreateWallet from "./create-Wallet.svelte";
 import "carbon-components-svelte/css/g100.css";
 import ListOfCredentials from "./list-of-Credentials.svelte";
@@ -37,50 +38,43 @@ import {
     CloudDownload,
     Login,
     MessageQueue,
-    DataBackup ,
+    DataBackup,
+    UserActivity,
+    Share
 } from "carbon-icons-svelte";
 let page = 'createWallet';
 </script>
 
 <div class="page-container">
-    {#if page === 'createWallet'}
+    {#if $pattern('/createWallet')} <!-- eg. /products/1 -->
     <CreateWallet/>
-
-        {:else if page === 'listCredential'}
-        <ListOfCredentials/>
-            {:else if page === 'receiveCredential'}
-            <ReceivingCredentials/>
-                {:else if page === 'activity'}
-                <Activity/>
-                    {:else if page === 'notification'}
-                    <Notifications/>
-                    {:else if page === 'loginSignup'}
-                    <LoginSignup/>
-                    {:else if page === 'message'}
-                    <Message/>    
-                    {:else if page === 'walletRegistration'}
-                    <WalletRegistration/>
-                    {:else if page === 'backup'}
-                    <Backup/>
-                    {:else if page === 'ShareCredentials'}
-                    <ShareCredentials/>
-                    {/if}
+{:else if $pattern('/listCredential')} <!-- eg. /products?page=2&q=Apple -->
+<ListOfCredentials/>
+{:else if $pattern('/activity')} <!-- eg. /products?page=2&q=Apple -->
+<Activity/>
+{:else if $pattern('/notification')} <!-- eg. /products?page=2&q=Apple -->
+<Notifications/>
+{:else if $pattern('/login')} <!-- eg. /products?page=2&q=Apple -->
+<LoginSignup/>
+{:else if $pattern('/login/form')} <!-- eg. /products?page=2&q=Apple -->
+<WalletRegistration/>
+{:else if $pattern('/backup')} <!-- eg. /products?page=2&q=Apple -->
+<Backup/>
+{:else if $pattern('/shareCredential')} <!-- eg. /products?page=2&q=Apple -->
+<ShareCredentials/>
+{:else}
+<LoginSignup/> 
+{/if}
                         <div class="footer">
 
                             <Row class="footer-container">
                                 <Row class="footer-tab tab-background">
-                                    <div on:click={()=>page='listCredential'} class="sub-tab1 bx--col" id="list-cred"><Password/></div>
-                                        <div on:click={()=>page='receiveCredential'} class="sub-tab1 bx--col" id="receive-cred"><CloudDownload/></div>
-
-                                            <div on:click={()=>page='activity'} class="sub-tab1 bx--col" id="activity"><AppConnectivity/></div>
-                                                <div on:click={()=>page='notification'} class="sub-tab1 bx--col" id="notification"><Notification/></div>
-                                                <div on:click={()=>page='loginSignup'} class="sub-tab1 bx--col" id="loginSignup"><Login/></div>
-                                                <div on:click={()=>page='message'} class="sub-tab1 bx--col" id="send"><MessageQueue/></div>
-                                                <div on:click={()=>page='walletRegistration'} class="sub-tab1 bx--col" id="register"><MessageQueue/></div>    
-                                                <div on:click={()=>page='backup'} class="sub-tab1 bx--col" id="backup"><DataBackup/></div>
-                    
+                                    <div on:click={()=>goto('/listCredential')} class="sub-tab1 bx--col" id="list-cred"><Password/></div>
+                                        <div on:click={()=>goto('/notification')} class="sub-tab1 bx--col" id="receive-cred"><Notification/></div>
+                                            <div on:click={()=>goto('/activity')} class="sub-tab1 bx--col" id="activity"><UserActivity/></div>
+                                                <div on:click={()=>goto('/backup')} class="sub-tab1 bx--col" id="notification"><DataBackup/></div> 
+                                                <div on:click={()=>goto('/shareCredential')} class="sub-tab1 bx--col" id="backup"><Share/></div>                  
                                             </Row>
-
                                                     </Row>
 
                                                     </div>
