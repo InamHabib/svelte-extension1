@@ -48,7 +48,9 @@
 
     <Row class=warning-container>
         <Column>
-        <p>Warning:Never disclose this key.Anyone with your private keys can steal any assets held in your account</p>
+        <p>
+            Warning: Never disclose this key. Anyone with your private keys can steal any assets held in your account.
+            </p>
         </Column>
     </Row>
 

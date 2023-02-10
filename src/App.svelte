@@ -11,6 +11,7 @@ import Message from "./message.svelte";
 import WalletRegistration from "./wallet-Registration.svelte";
 import Backup from "./backup.svelte";
 import ShareCredentials from "./share-Credentials.svelte";
+import "./styles/index.scss"
 import {
     getContext,
     onMount
