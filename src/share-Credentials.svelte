@@ -21,40 +21,23 @@ import {
 
 
 <div class="share-container">
-
-    <div class="title-container">
-        <h1> Share the following credentials?
-        </h1>
-        <h2>Server Group #1</h2>
-        <h6>SSH Keys</h6>
-
+    <div class="top">
+        <h1>Share the following credentials</h1>
+        <h1>Server Group 1</h1>
+        <p>SSH Keys</p>
+        <div class="image-container">
+            <img src="/images/share.svg" width="100px" height="100px" />
+        </div>
+    </div>
+<div class="bottom">
+    <!-- <div class="image-container">
+        <NotificationFilled size={64} />
+    </div> -->
+    <h2>Press share if you would like to share these credentials</h2>
+    <h5>If you press accept the receiving resource will authenticate you</h5>
+    <div class="button-container">
+        <Button type="primary" on:click={()=>goto('/listCredential')}>Accept</Button>
+        <Button kind="ghost">Decline</Button>
     </div>
 
-    <Row>
-        <Column>
-            
-        <img src={'./images/image_1.png'} width="100px" height="100px" />
-        </Column>
-    </Row>
-    <Row class="bottom-container">
-        <Row>
-            <Column><NotificationFilled/></Column>
-                </Row>
-                <Row>
-                    <Column><h5>Press Share if you would like to share these credentials</h5></Column>
-                </Row>
-
-              <br />
-                </Row>
-
-                <Row class="share-button">
-                    <Column>
-                    <Row>
-                        <ButtonSet stacked>
-                            <Button>Share</Button>
-                        </ButtonSet>
-                    </Row>
-                    </Column>
-                </Row>
-
-                </div>
+</div></div>

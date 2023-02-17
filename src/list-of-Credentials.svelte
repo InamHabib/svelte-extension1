@@ -16,7 +16,7 @@ import {
 import axios from 'axios';
 import {onMount} from 'svelte';
 let selected="All"
-
+let data = [];
 const handleNotification = () =>{
     Notification.requestPermission().then((result) => {
   console.log(result);
@@ -42,19 +42,18 @@ onMount(async ()=>{
         pageDetails
       )
       .then((res) => {
-        // console.log(res.data);
-        data = res.data.map((ad, i) => ({
-          id: i,
-          directory: ad.DirectoryName,
-          type: ad.IntegrationType,
-          userCount: ad.UsersCount.length,
-          groupCount: ad.GroupCount.length,
-        }));
-        loading = false;
+         console.log(res.data);
+         if(res && res.data && res.data.credentials)
+         {
+        data = res.data.credentials
+         }
+         
+
+
       })
       .catch(() => {
         // alert("Error fetching data");
-        loading = false;
+
       });
 })
 
@@ -70,7 +69,6 @@ onMount(async ()=>{
         <Button class={selected == "All" ? "selected-tab" : ""} on:click={() => selected="All"} >All</Button>
         <Button class={selected == "Server" ? "selected-tab" : ""} on:click={() => selected="Server"} >Server</Button>
         <Button class={selected == "Groups" ? "selected-tab" : ""} on:click={() => selected="Groups"} >Groups</Button>
-        <Button class={selected == "Apps" ? "selected-tab" : ""} on:click={() => selected="Apps"}>Apps</Button>
     </Row>
     <Row>
         <Column class="search-bar">
@@ -80,7 +78,7 @@ onMount(async ()=>{
 {#if selected=="All"}
     <Row>
         <Column  class="data-container">
-            {#each Array(5) as _, index (index)}
+            {#each data as credential}
             <Row class="data-tabs" onClick={()=>goto('/credentials')}>
                 <Column class="sub-tab2">
                     <div class="card">
@@ -88,10 +86,10 @@ onMount(async ()=>{
                             <img src="/images/share.svg" height="50px" width="50px" />
                         </div>
                         <div class="content-container">
-                            <h4 on:click={()=>handleNotification()}>Credential for Server 1
+                            <h4 on:click={()=>handleNotification()}>Credential for {credential.name}
                             </h4>
                             <span>Credential type: SSH Keys </span>
-                <p>Issued at 5.45pm for Asif</p>
+                            <p>Issued at 5.45pm by Broardcom</p>
                         </div>
                     </div>
                
@@ -106,7 +104,62 @@ onMount(async ()=>{
    
     {/if}
 
+    {#if selected=="Server"}
+    <Row>
+        <Column  class="data-container">
+            {#each data as credential}
+            <Row class="data-tabs" onClick={()=>goto('/credentials')}>
+                <Column class="sub-tab2">
+                    <div class="card">
+                        <div class="image-container">
+                            <img src="/images/share.svg" height="50px" width="50px" />
+                        </div>
+                        <div class="content-container">
+                            <h4 on:click={()=>handleNotification()}>Credential for {credential.name}
+                            </h4>
+                            <span>Credential type: SSH Keys </span>
+                            <p>Issued at 3.45pm by Broardcom</p>
+                        </div>
+                    </div>
+               
+                
+                
+                </Column>
+            </Row>
+            {/each}
+        </Column>
 
+    </Row>
+   
+    {/if}
+    {#if selected=="Groups"}
+    <Row>
+        <Column  class="data-container">
+            {#each data as credential}
+            <Row class="data-tabs" onClick={()=>goto('/credentials')}>
+                <Column class="sub-tab2">
+                    <div class="card">
+                        <div class="image-container">
+                            <img src="/images/share.svg" height="50px" width="50px" />
+                        </div>
+                        <div class="content-container">
+                            <h4 on:click={()=>handleNotification()}>Credential for {credential.name}
+                            </h4>
+                            <span>Credential type: SSH Keys </span>
+                            <p>Issued at 4.45pm by Broardcom</p>
+                        </div>
+                    </div>
+               
+                
+                
+                </Column>
+            </Row>
+            {/each}
+        </Column>
+
+    </Row>
+   
+    {/if}
    
 
 

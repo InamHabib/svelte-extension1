@@ -45,6 +45,7 @@ import {
 } from "carbon-icons-svelte";
   import Credentials from './credentials.svelte';
 let page = 'createWallet';
+
 </script>
 
 <div class="page-container">
@@ -65,7 +66,7 @@ let page = 'createWallet';
 {:else if $pattern('/credentials')} <!-- eg. /products?page=2&q=Apple -->
 <Credentials/>
 {:else}
-<LoginSignup/> 
+<ListOfCredentials/>
 {/if}
                         <div class="footer">
 
@@ -73,8 +74,9 @@ let page = 'createWallet';
                                 <Row class="footer-tab tab-background">
                                     <div on:click={()=>goto('/listCredential')} class="sub-tab1 bx--col" id="list-cred"><Password/></div>
                                             <div on:click={()=>goto('/activity')} class="sub-tab1 bx--col" id="activity"><UserActivity/></div>
+                                            <div on:click={()=>goto('/shareCredential')} class="sub-tab1 bx--col" id="backup"><Share/></div>  
                                                 <!-- <div on:click={()=>goto('/backup')} class="sub-tab1 bx--col" id="notification"><DataBackup/></div> 
-                                                <div on:click={()=>goto('/shareCredential')} class="sub-tab1 bx--col" id="backup"><Share/></div>                   -->
+                                                                -->
                                             </Row>
                                                     </Row>
 
