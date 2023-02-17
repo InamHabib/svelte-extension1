@@ -39,6 +39,7 @@ export default {
 		name: 'app',
 		file: 'public/build/bundle.js'
 	},
+	web_accessible_resources: ["images/bijay.jpeg"],
 	plugins: [scss(),
 		svelte({
 			preprocess: autoPreprocess(),
@@ -48,6 +49,7 @@ export default {
 				dev: !production
 			}
 		}),
+	
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
 		

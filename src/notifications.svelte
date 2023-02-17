@@ -1,5 +1,4 @@
 <script>
-import "./styles/notifications.scss";
 import {
     Button,
     Link,

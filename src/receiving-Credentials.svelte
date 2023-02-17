@@ -1,5 +1,4 @@
 <script>
-import "./styles/receiving-Credentials.scss";
 import {
     Button,
     Link,

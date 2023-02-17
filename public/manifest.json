@@ -7,6 +7,10 @@
     "background" : {
       "service_worker": "background.js"
     },
+    "icons": {
+      "16": "images/bijay.jpeg",
+      "32": "images/share.svg"
+   },
     
     "permissions": ["activeTab",
                      "notifications" ],

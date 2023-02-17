@@ -1,5 +1,4 @@
 <script>
-import "./styles/footer.scss";
 import {
     Button,
     Link,

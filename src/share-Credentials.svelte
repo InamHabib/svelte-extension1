@@ -1,5 +1,4 @@
 <script>
-import "./styles/share-Credentials.scss";
 import {
     ButtonSet,
     Button,
@@ -20,6 +19,7 @@ import {
 } from "carbon-icons-svelte"
 </script>
 
+
 <div class="share-container">
 
     <div class="title-container">
@@ -31,7 +31,10 @@ import {
     </div>
 
     <Row>
-        <Column></Column>
+        <Column>
+            
+        <img src={'./images/image_1.png'} width="100px" height="100px" />
+        </Column>
     </Row>
     <Row class="bottom-container">
         <Row>
@@ -41,9 +44,7 @@ import {
                     <Column><h5>Press Share if you would like to share these credentials</h5></Column>
                 </Row>
 
-                <Row>
-                    <p>If you press accept, the receiving resource will authenticate you.</p>
-                </Row>
+              <br />
                 </Row>
 
                 <Row class="share-button">
@@ -51,7 +52,6 @@ import {
                     <Row>
                         <ButtonSet stacked>
                             <Button>Share</Button>
-                            <Button kind="ghost">Decline</Button>
                         </ButtonSet>
                     </Row>
                     </Column>

@@ -1,5 +1,5 @@
 <script>
-import "./styles/list-of-Credentials.scss";
+import { goto } from "svelte-pathfinder";
 import {
     Button,
     Link,
@@ -13,277 +13,99 @@ import {
     Tabs,
     TabContent,
 } from "carbon-components-svelte";
-
+import axios from 'axios';
+import {onMount} from 'svelte';
 let selected="All"
+
+const handleNotification = () =>{
+    Notification.requestPermission().then((result) => {
+  console.log(result);
+  const img = '' ;
+const text = `HEY! You have a new authnull wallet notification.`;
+const notification = new Notification('Authnull wallet', { body: text, icon: img });
+
+});
+}
+
+onMount(async ()=>{
+    let pageDetails =  {
+    "domainId": 1
+ }
+ let config = {
+      headers: {
+        Authorization: "34rfdhuytqwrtttbcv",
+      },
+    };
+    axios
+      .post(
+        `https://api.did.kloudlearn.com/api/v1/credential/credentialList`,
+        pageDetails
+      )
+      .then((res) => {
+        // console.log(res.data);
+        data = res.data.map((ad, i) => ({
+          id: i,
+          directory: ad.DirectoryName,
+          type: ad.IntegrationType,
+          userCount: ad.UsersCount.length,
+          groupCount: ad.GroupCount.length,
+        }));
+        loading = false;
+      })
+      .catch(() => {
+        // alert("Error fetching data");
+        loading = false;
+      });
+})
+
 </script>
 
 <div class="list-of-credentials">
-    <Row>
-        <Column class="search-bar">
-        <Search  size="sm" /> </Column>
-    </Row>
     <Row>
         <Column class="title-container">
         <h1>Available Credentials</h1>
         </Column>
     </Row>
     <Row class="tabs-container">
-        <Button on:click={() => selected="All"} >All</Button>
-        <Button on:click={() => selected="Server"} >Server</Button>
-        <Button on:click={() => selected="Groups"} >Groups</Button>
-        <Button on:click={() => selected="Apps"}>Apps</Button>
+        <Button class={selected == "All" ? "selected-tab" : ""} on:click={() => selected="All"} >All</Button>
+        <Button class={selected == "Server" ? "selected-tab" : ""} on:click={() => selected="Server"} >Server</Button>
+        <Button class={selected == "Groups" ? "selected-tab" : ""} on:click={() => selected="Groups"} >Groups</Button>
+        <Button class={selected == "Apps" ? "selected-tab" : ""} on:click={() => selected="Apps"}>Apps</Button>
     </Row>
     <Row>
-        <Column class="title-2"><h2>Popular</h2></Column>
+        <Column class="search-bar">
+            <Search  size="sm" />
+        </Column>
     </Row>
 {#if selected=="All"}
-    <Row class="data-container">
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server 1
-            </h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server 1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server 1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server 1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server 1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server 1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server 1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server 1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
+    <Row>
+        <Column  class="data-container">
+            {#each Array(5) as _, index (index)}
+            <Row class="data-tabs" onClick={()=>goto('/credentials')}>
+                <Column class="sub-tab2">
+                    <div class="card">
+                        <div class="image-container">
+                            <img src="/images/share.svg" height="50px" width="50px" />
+                        </div>
+                        <div class="content-container">
+                            <h4 on:click={()=>handleNotification()}>Credential for Server 1
+                            </h4>
+                            <span>Credential type: SSH Keys </span>
+                <p>Issued at 5.45pm for Asif</p>
+                        </div>
+                    </div>
+               
+                
+                
+                </Column>
+            </Row>
+            {/each}
+        </Column>
 
     </Row>
-    {/if}
-       
-    {#if selected=="Server"}
-    <Row class="data-container">
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server 2</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-
-    </Row>
+   
     {/if}
 
-    {#if selected=="Groups"}
-    <Row class="data-container">
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server 3</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-
-    </Row>
-    {/if}
-
-    {#if selected=="Apps"}
-    <Row class="data-container">
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server 4</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-        <Row class="data-tabs">
-            <Column id="sub-tab1"></Column>
-            <Column id="sub-tab2"><h4>Credential for Server1</h4>
-            <span>Credential type: SSH Keys </span>
-            <p>Issued at 5.45pm for Asif</p>
-            </Column>
-        </Row>
-
-    </Row>
-    {/if}
 
    
 

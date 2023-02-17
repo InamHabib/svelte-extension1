@@ -16,24 +16,24 @@
         Upload,
     
     } from "carbon-icons-svelte"
+  import { goto } from "svelte-pathfinder";
     </script>
     
     <div class="registration-container">
 
         <div class="title-container">
-            <h1> Create a wallet </h1>
+            <h1> Credential for Sever #1</h1>
          </div>
-    <Form >
-        <TextInput size="sm" labelText="Username" placeholder=""/>
-        <TextInput size="sm" labelText="Passkey" placeholder=""/>
+
+        <TextInput size="sm" labelText="Username" placeholder="" value="xssjnfkfnd" />
+        <TextInput size="sm" labelText="Passkey" placeholder="" value="xssjnfk123@fnd"/>
 
         <Row>
             <Column>
-            <Button type="primary">Submit</Button>
+            <Button type="primary" on:click={()=>goto('/shareCredentials')}>Share</Button>
             </Column>
         </Row>
 
-    </Form>
 
      </div>
     

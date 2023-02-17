@@ -1,5 +1,4 @@
 <script>
-import "./styles/Create-Wallet.scss"
 import {
     Button,
     Loading,

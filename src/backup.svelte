@@ -1,5 +1,4 @@
 <script>
-    import "./styles/backup.scss";
     import {
         Form,
         Button,

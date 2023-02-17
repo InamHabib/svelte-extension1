@@ -1,5 +1,5 @@
 <script>
-    import "./styles/login-Signup.scss";
+
     import {
         Button,
         Link,
@@ -10,7 +10,7 @@
         Column,
         FileUploader,
     } from "carbon-components-svelte";
-    
+
     import {
         Add,
         Upload,
@@ -18,26 +18,28 @@
     } from "carbon-icons-svelte"
   import { goto } from "svelte-pathfinder";
     </script>
-    
-    <div class="login-container">
 
-        <Row class="box">
-            <Column></Column>
+        <Column class="welcome-container">
+        <Row>
+            <Column>
+                <img src="./images/logo.png" width="100px" />
+            </Column>
+            
         </Row>
-        <div class="title-container">
-            <h1> Welcome to
-                Authnull Wallet </h1>
-                <p>Use your “username” passkey to login to the wallet`</p>
-    
-        </div>
-    
-                    <Row class="signup-button">
-                        <Column>
-                        <Row>
-                            <Button type="primary" on:click={()=>goto('/login/form')}>Signup </Button>
-                        </Row>
-                        </Column>
-                    </Row>
-    
-                    </div>
+        <Row>
+            <Column>
+                <h1> Welcome to <br />
+                    Authnull Wallet</h1>
+            </Column>
+            
+        </Row>
+        <Row>
+            <Column>
+                <Button type="primary" on:click={()=>goto('/listCredential')}>Login </Button>
+            
+            </Column>
+        </Row>
+        </Column>
+
+
     
