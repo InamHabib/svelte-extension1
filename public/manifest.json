@@ -13,10 +13,12 @@
    },
     
     "permissions": ["activeTab",
-                     "notifications" ],
+                     "notifications", "alarms", "background"],
+    
     "action": {
       "default_popup": "index.html"
     }
+    
     
     
 }

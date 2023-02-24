@@ -45,7 +45,26 @@ import {
 } from "carbon-icons-svelte";
   import Credentials from './credentials.svelte';
 let page = 'createWallet';
+const delayInMinutes = 0.1;
+chrome.alarms.create({
+       delayInMinutes: 0.1, periodInMinutes: 0.1});
 
+function handleAlarm(alarmInfo) {
+  console.log(`on alarm: ${alarmInfo.name}`);
+  chrome.notifications.create(
+            // "drink_water",
+            {
+                type: "basic",
+                iconUrl: "images/bijay.jpeg",
+                title: "Stay Hydrated",
+                message: "Have a sip of water human!",
+                silent: false
+            },
+            () => { }
+        )
+}
+
+chrome.alarms.onAlarm.addListener(handleAlarm);
 </script>
 
 <div class="page-container">
