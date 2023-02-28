@@ -10,7 +10,7 @@ import {
     Column,
     FileUploader,
 } from "carbon-components-svelte";
-
+import {goto} from 'svelte-pathfinder';
 import {
     Add,
     Upload,

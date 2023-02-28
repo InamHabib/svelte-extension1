@@ -28,25 +28,51 @@ const notification = new Notification('Authnull wallet', { body: text, icon: img
 }
 
 onMount(async ()=>{
-    let pageDetails =  {
-    "domainId": 1
- }
- let config = {
-      headers: {
-        Authorization: "34rfdhuytqwrtttbcv",
-      },
+    pollCredential();
+})
+chrome.alarms.onAlarm.addListener(handleAlarm);
+function handleAlarm(alarmInfo) {
+chrome.notifications.create(
+         // "drink_water",
+         {
+             type: "basic",
+             iconUrl: "images/logo.png",
+             title: "Authnull",
+             message: "Credential have been assigned to you",
+             silent: false
+         },
+         () => { }
+     )
+}
+async function pollCredential() {
+    let pageDetails = {
+    "walletKey": 'dnfdm-dfdsfdf-dfdfd=dfdasfn',
+    "email": JSON.parse(localStorage.getItem('userInfo')).email
+
     };
+    let url = 'https://api.did.kloudlearn.com/api/v1/walletService/pollCredentials';
     axios
       .post(
-        `https://api.did.kloudlearn.com/api/v1/credential/credentialList`,
+        url,
         pageDetails
       )
       .then((res) => {
-         console.log(res.data);
-         if(res && res.data && res.data.credentials)
-         {
-        data = res.data.credentials
-         }
+        console.log(res.data);
+      let tempCredentials = localStorage.getItem('credentials');
+      if(tempCredentials && tempCredentials.length)
+      {
+        tempCredentials.push(res.data.credentials[0])
+      }
+      else{
+        tempCredentials = [];
+      }
+      if(res.data.credentials[0])
+      {
+        chrome.alarms.create({
+    delayInMinutes: 0.1, periodInMinutes: 0.1});
+      }
+      let data = tempCredentials;
+      localStorage.setItem('credentials', tempCredentials);
          
 
 
@@ -55,8 +81,8 @@ onMount(async ()=>{
         // alert("Error fetching data");
 
       });
-})
 
+}
 </script>
 
 <div class="list-of-credentials">

@@ -5,6 +5,7 @@ import "carbon-components-svelte/css/g100.css";
 import ListOfCredentials from "./list-of-Credentials.svelte";
 import ReceivingCredentials from "./receiving-Credentials.svelte";
 import Activity from "./activity.svelte";
+import axios from 'axios';
 import Notifications from "./notifications.svelte";
 import Footer from "./footer.svelte";
 import LoginSignup from "./login-Signup.svelte";
@@ -12,6 +13,7 @@ import Message from "./message.svelte";
 import WalletRegistration from "./wallet-Registration.svelte";
 import Backup from "./backup.svelte";
 import ShareCredentials from "./share-Credentials.svelte";
+// import {machineIdSync} from 'node-machine-id';
 import "./index.scss";
 import {
     getContext,
@@ -44,27 +46,89 @@ import {
     Share
 } from "carbon-icons-svelte";
   import Credentials from './credentials.svelte';
-let page = 'createWallet';
-const delayInMinutes = 0.1;
-chrome.alarms.create({
-       delayInMinutes: 0.1, periodInMinutes: 0.1});
+// let page = 'createWallet';
+// const delayInMinutes = 0.1;
+// chrome.alarms.create({
+//        delayInMinutes: 0.1, periodInMinutes: 0.1});
 
-function handleAlarm(alarmInfo) {
-  console.log(`on alarm: ${alarmInfo.name}`);
-  chrome.notifications.create(
-            // "drink_water",
-            {
-                type: "basic",
-                iconUrl: "images/bijay.jpeg",
-                title: "Stay Hydrated",
-                message: "Have a sip of water human!",
-                silent: false
-            },
-            () => { }
-        )
+// function handleAlarm(alarmInfo) {
+//   console.log(`on alarm: ${alarmInfo.name}`);
+//   chrome.notifications.create(
+//             // "drink_water",
+//             {
+//                 type: "basic",
+//                 iconUrl: "images/bijay.jpeg",
+//                 title: "Stay Hydrated",
+//                 message: "Have a sip of water human!",
+//                 silent: false
+//             },
+//             () => { }
+//         )
+// }
+
+// chrome.alarms.onAlarm.addListener(handleAlarm);
+function makeid(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+}
+if(!localStorage.getItem('userInfo'))
+{
+    registerUser();
+}
+async function registerUser() {
+    let deviceId = makeid(7);
+    let data = {
+    "deviceId": deviceId,
+    "email": "iname@kloudone.com"
+
+    };
+    let url = 'https://api.did.kloudlearn.com/api/v1/wallet/registerUser';
+    try {
+      const res = await axios.post(url, data);
+      console.log(res.data);
+      let tempData = {
+        email : 'inam@kloudone.com',
+        deviceId : deviceId
+      }
+      localStorage.setItem('userInfo', tempData);
+      registerWallet();
+    //   localStorage.setItem("userInfo", data);
+    } catch (err) {
+        let tempData = {
+        email : 'inam@kloudone.com',
+        deviceId : deviceId
+      }
+      tempData = JSON.stringify(tempData);
+      localStorage.setItem('userInfo', tempData);
+       registerWallet();
+       console.log(err);
+    }
 }
 
-chrome.alarms.onAlarm.addListener(handleAlarm);
+async function registerWallet() {
+    let data = {
+    "walletKey": 'dnfdm-dfdsfdf-dfdfd=dfdasfn',
+    "email": JSON.parse(localStorage.getItem('userInfo')).email
+
+    };
+    let url = 'https://api.did.kloudlearn.com/api/v1/walletService/registerDevice';
+    try {
+      const res = await axios.post(url, data);
+      console.log(res.data);
+      
+    //   localStorage.setItem("userInfo", data);
+    } catch (err) {
+        
+       console.log(err);
+    }
+}
 </script>
 
 <div class="page-container">
@@ -93,7 +157,7 @@ chrome.alarms.onAlarm.addListener(handleAlarm);
                                 <Row class="footer-tab tab-background">
                                     <div on:click={()=>goto('/listCredential')} class="sub-tab1 bx--col" id="list-cred"><Password/></div>
                                             <div on:click={()=>goto('/activity')} class="sub-tab1 bx--col" id="activity"><UserActivity/></div>
-                                            <div on:click={()=>goto('/shareCredential')} class="sub-tab1 bx--col" id="backup"><Share/></div>  
+                                            <div on:click={()=>{goto('/shareCredential'),registerUser()}} class="sub-tab1 bx--col" id="backup"><Share/></div>  
                                                 <!-- <div on:click={()=>goto('/backup')} class="sub-tab1 bx--col" id="notification"><DataBackup/></div> 
                                                                 -->
                                             </Row>
