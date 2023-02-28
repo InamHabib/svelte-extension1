@@ -16,7 +16,7 @@ import ShareCredentials from "./share-Credentials.svelte";
 // import {machineIdSync} from 'node-machine-id';
 import "./index.scss";
 import {
-    getContext,
+    get,
     onMount
 } from "svelte";
 import "./styles/footer.scss";
@@ -67,6 +67,7 @@ import {
 // }
 
 // chrome.alarms.onAlarm.addListener(handleAlarm);
+let userInfo = chrome.storage.local.get('userInfo');
 function makeid(length) {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -78,7 +79,7 @@ function makeid(length) {
     }
     return result;
 }
-if(!localStorage.getItem('userInfo'))
+if(!userInfo)
 {
     registerUser();
 }
@@ -97,16 +98,16 @@ async function registerUser() {
         email : 'inam@kloudone.com',
         deviceId : deviceId
       }
-      localStorage.setItem('userInfo', tempData);
+      chrome.storage.local.set('userInfo', tempData);
       registerWallet();
-    //   localStorage.setItem("userInfo", data);
+    //   chrome.storage.local.set("userInfo", data);
     } catch (err) {
         let tempData = {
         email : 'inam@kloudone.com',
         deviceId : deviceId
       }
       tempData = JSON.stringify(tempData);
-      localStorage.setItem('userInfo', tempData);
+      chrome.storage.local.set('userInfo', tempData);
        registerWallet();
        console.log(err);
     }
@@ -115,15 +116,20 @@ async function registerUser() {
 async function registerWallet() {
     let data = {
     "walletKey": 'dnfdm-dfdsfdf-dfdfd=dfdasfn',
-    "email": JSON.parse(localStorage.getItem('userInfo')).email
+    "email": JSON.parse(userInfo).email
 
     };
     let url = 'https://api.did.kloudlearn.com/api/v1/walletService/registerDevice';
     try {
       const res = await axios.post(url, data);
       console.log(res.data);
-      
-    //   localStorage.setItem("userInfo", data);
+      let tempUserInfo = JSON.parse(userInfo)
+      tempUserInfo = {
+        ...
+        walletKey = 'dnfdm-dfdsfdf-dfdfd=dfdasfn'
+      }
+      chrome.storage.local.set('userInfo', JSON.stringify(tempUserInfo))
+    //   chrome.storage.local.set("userInfo", data);
     } catch (err) {
         
        console.log(err);

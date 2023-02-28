@@ -6,7 +6,8 @@
     "manifest_version": 3,
     "background" : {
       "service_worker": "background.js",
-      "type": "module"
+      "persistent": true
+
     },
     "icons": {
       "16": "images/bijay.jpeg",
@@ -15,7 +16,7 @@
    },
     
     "permissions": ["activeTab",
-                     "notifications", "alarms", "background"],
+                     "notifications", "alarms", "background", "storage"],
     
     "action": {
       "default_popup": "index.html"
