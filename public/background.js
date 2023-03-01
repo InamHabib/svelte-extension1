@@ -11,11 +11,13 @@ function handleAlarm(alarmInfo) {
 async function pollCredential() {
   // Default options are marked with *
   chrome.storage.local.get(["userInfo"]).then((result) => {
-    let userInfo =result && result.userInfo && JSON.parse(result.userInfo)
+    let userInfo = result && result.userInfo && JSON.parse(result.userInfo)
     if(userInfo)
     {
-      let data ={ "walletKey": userInfo.walletKey,
-      "email": userInfo.email }
+      console.log(userInfo)
+      let data = 
+      {walletKey: userInfo.walletKey,
+      email: userInfo.email }
       fetch("https://api.did.kloudlearn.com/api/v1/walletService/pollCredentials", {
         method: "POST", // or 'PUT'
         headers: {
@@ -24,7 +26,7 @@ async function pollCredential() {
         body: JSON.stringify(data),
       })
         .then((response) => response.json())
-        .then((data) => {
+        .then((res) => {
           console.log(data); // JSON data parsed by `data.json()` call
     let tempCredentials;
     chrome.storage.local.get(["credentials"]).then((result) => {

@@ -31,14 +31,22 @@
         console.log("Inam")
     let deviceId = makeid(7);
     let data = {
-    "deviceId": deviceId,
-    "email": username
+    deviceId: deviceId,
+    email: username
 
     };
     let url = 'https://api.did.kloudlearn.com/api/v1/wallet/registerUser';
     try {
       const res = await axios.post(url, data);
       console.log(res.data);
+      let tempUserInfo = {
+      
+      email : username,
+      deviceId : deviceId,
+    
+  }
+  chrome.storage.local.set({ userInfo: JSON.stringify(tempUserInfo) })
+      userInfo = tempUserInfo;
       registerWallet();
     //   chrome.storage.local.set("userInfo", data);
     } catch (err) {
@@ -58,20 +66,17 @@
 
 async function registerWallet() {
     let data = {
-    "walletKey": walletKey,
-    "email": username
+    walletKey: walletKey,
+    email: username
 
     };
     let url = 'https://api.did.kloudlearn.com/api/v1/walletService/registerDevice';
     try {
       const res = await axios.post(url, data);
-      console.log(res.data);
+      console.log(data);
       let tempUserInfo = userInfo;
 
-      tempUserInfo = {
-        ...
-        walletKey = walletKey
-      }
+      tempUserInfo.walletKey = walletKey;
       chrome.storage.local.set({userInfo: JSON.stringify(tempUserInfo)})
       goto('/listCredential');
     //   chrome.storage.local.set("userInfo", data);
