@@ -45,32 +45,10 @@ async function pollCredential() {
   }
   else{
   tempCredentials = [];
-  chrome.notifications.create(
-    // "drink_water",
-    {
-        type: "basic",
-        iconUrl: "images/logo.png",
-        title: "Authnull",
-        message: `Credential have been assigned to you by`,
-        silent: false
-    },
-    () => { }
-  )
   }
   chrome.storage.local.set({ credentials: JSON.stringify(tempCredentials) })
       })
       .catch((error) => {
-        chrome.notifications.create(
-          // "drink_water",
-          {
-              type: "basic",
-              iconUrl: "images/logo.png",
-              title: "Authnull",
-              message: `Error have been assigned to you by`,
-              silent: false
-          },
-          () => { }
-        )
       });
   });
 
