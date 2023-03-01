@@ -22,16 +22,6 @@
     let selected="All"
     
 
-    onMount(async () => {
-    Notification.requestPermission().then((result) => {
-  console.log(result);
-  const img = '/images/logo.png' ;
-const text = `Server Group has just requested for credentials`;
-const notification = new Notification('Authnull wallet', { body: text, icon: img });
-
-});
-	});
-
     
     </script>
     
