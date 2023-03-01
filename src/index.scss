@@ -114,6 +114,44 @@ body{
                 margin-bottom: 3rem;
             }
         }
+        .registration-container{
+            h1{
+                font-weight: bold;
+                font-size: 1.3em;
+                margin-bottom: 1rem;
+            }
+            display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    height: 500px;
+    .bx--form{
+        margin-top: 5rem;
+        .bx--form-item{
+            margin-bottom: 1rem;
+            padding: 0 16px;
+            .bx--label{
+                font-size: 1.1em;
+                color: #000;
+                font-weight: 600;
+            }
+            .bx--text-input{
+                background: #fff;
+                border: 1px solid #ccc !important;
+                border-radius: 4px;
+                color: #000;
+            }
+        }
+    }
+    .bx--btn--primary{
+        margin: 0 auto;
+        width: 100%;
+        margin-top: 3rem;
+        height: fit-content;
+        min-height: fit-content;
+        border: none;
+        border-radius: 4px;
+    }
+        }
         .list-of-credentials{
             display: flex;
             flex-direction: column;

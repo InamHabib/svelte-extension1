@@ -18,7 +18,7 @@ import {onMount} from 'svelte';
 let selected="All"
 let data;
 chrome.storage.local.get(["credentials"]).then((result) => {
- data = JSON.parse(result.credentials)
+ data = result && result.credentials && JSON.parse(result.credentials)
 })
 
 

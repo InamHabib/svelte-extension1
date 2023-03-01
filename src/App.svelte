@@ -70,76 +70,19 @@ import {
 
 let userInfo;
 chrome.storage.local.get(["userInfo"]).then((result) => {
-  userInfo = JSON.parse(result.userInfo)
+  userInfo = result && result.userInfo && JSON.parse(result.userInfo);
+  console.log(userInfo);
+  if(!userInfo)
+{
+ 
+goto('/login')
+
+}
 })
 
-function makeid(length) {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    let counter = 0;
-    while (counter < length) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-      counter += 1;
-    }
-    return result;
-}
-if(!userInfo)
-{
-    registerUser();
 
 
-}
-async function registerUser() {
-    let deviceId = makeid(7);
-    let data = {
-    "deviceId": deviceId,
-    "email": "iname@kloudone.com"
 
-    };
-    let url = 'https://api.did.kloudlearn.com/api/v1/wallet/registerUser';
-    try {
-      const res = await axios.post(url, data);
-      console.log(res.data);
-      registerWallet();
-    //   chrome.storage.local.set("userInfo", data);
-    } catch (err) {
-      let tempUserInfo = {
-      
-      email : 'inam@kloudone.com',
-      deviceId : 'XYXYXYXYXYX',
-    
-  }
-  chrome.storage.local.set({ userInfo: JSON.stringify(tempUserInfo) })
-      userInfo = tempUserInfo;
-       registerWallet();
-       console.log(err);
-    }
-}
-
-async function registerWallet() {
-    let data = {
-    "walletKey": 'dnfdm-dfdsfdf-dfdfd=dfdasfn',
-    "email": userInfo.email
-
-    };
-    let url = 'https://api.did.kloudlearn.com/api/v1/walletService/registerDevice';
-    try {
-      const res = await axios.post(url, data);
-      console.log(res.data);
-      let tempUserInfo = userInfo;
-
-      tempUserInfo = {
-        ...
-        walletKey = 'dnfdm-dfdsfdf-dfdfd=dfdasfn'
-      }
-      chrome.storage.local.set({userInfo: JSON.stringify(tempUserInfo)})
-    //   chrome.storage.local.set("userInfo", data);
-    } catch (err) {
-        
-       console.log(err);
-    }
-}
 </script>
 
 <div class="page-container">
@@ -150,8 +93,6 @@ async function registerWallet() {
 {:else if $pattern('/activity')} <!-- eg. /products?page=2&q=Apple -->
 <Activity/>
 {:else if $pattern('/login')} <!-- eg. /products?page=2&q=Apple -->
-<LoginSignup/>
-{:else if $pattern('/login/form')} <!-- eg. /products?page=2&q=Apple -->
 <WalletRegistration/>
 {:else if $pattern('/backup')} <!-- eg. /products?page=2&q=Apple -->
 <Backup/>
@@ -168,7 +109,7 @@ async function registerWallet() {
                                 <Row class="footer-tab tab-background">
                                     <div on:click={()=>goto('/listCredential')} class="sub-tab1 bx--col" id="list-cred"><Password/></div>
                                             <div on:click={()=>goto('/activity')} class="sub-tab1 bx--col" id="activity"><UserActivity/></div>
-                                            <div on:click={()=>{goto('/shareCredential'),registerUser()}} class="sub-tab1 bx--col" id="backup"><Share/></div>  
+                                            <div on:click={()=>{goto('/shareCredential')}} class="sub-tab1 bx--col" id="backup"><Share/></div>  
                                                 <!-- <div on:click={()=>goto('/backup')} class="sub-tab1 bx--col" id="notification"><DataBackup/></div> 
                                                                 -->
                                             </Row>
