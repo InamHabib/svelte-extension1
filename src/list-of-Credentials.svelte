@@ -16,18 +16,10 @@ import {
 import axios from 'axios';
 import {onMount} from 'svelte';
 let selected="All"
-let data = localStorage.getItem('credentials');
-data = data && JSON.parse(data);
-const handleNotification = () =>{
-    Notification.requestPermission().then((result) => {
-  console.log(result);
-  const img = '' ;
-const text = `HEY! You have a new authnull wallet notification.`;
-const notification = new Notification('Authnull wallet', { body: text, icon: img });
-
-
-});
-}
+let data;
+chrome.storage.local.get(["credentials"]).then((result) => {
+ data = JSON.parse(result.credentials)
+})
 
 
 </script>
@@ -60,7 +52,7 @@ const notification = new Notification('Authnull wallet', { body: text, icon: img
                             <img src="/images/share.svg" height="50px" width="50px" />
                         </div>
                         <div class="content-container">
-                            <h4 on:click={()=>handleNotification()}>Credential for {credential.name}
+                            <h4>Credential for {credential.name}
                             </h4>
                             <span>Credential type: SSH Keys </span>
                             <p>Issued at 5.45pm by Broardcom</p>

@@ -67,7 +67,12 @@ import {
 // }
 
 // chrome.alarms.onAlarm.addListener(handleAlarm);
-let userInfo = chrome.storage.local.get('userInfo');
+
+let userInfo;
+chrome.storage.local.get(["userInfo"]).then((result) => {
+  userInfo = JSON.parse(result.userInfo)
+})
+
 function makeid(length) {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -82,6 +87,8 @@ function makeid(length) {
 if(!userInfo)
 {
     registerUser();
+
+
 }
 async function registerUser() {
     let deviceId = makeid(7);
@@ -94,20 +101,17 @@ async function registerUser() {
     try {
       const res = await axios.post(url, data);
       console.log(res.data);
-      let tempData = {
-        email : 'inam@kloudone.com',
-        deviceId : deviceId
-      }
-      chrome.storage.local.set('userInfo', tempData);
       registerWallet();
     //   chrome.storage.local.set("userInfo", data);
     } catch (err) {
-        let tempData = {
-        email : 'inam@kloudone.com',
-        deviceId : deviceId
-      }
-      tempData = JSON.stringify(tempData);
-      chrome.storage.local.set('userInfo', tempData);
+      let tempUserInfo = {
+      
+      email : 'inam@kloudone.com',
+      deviceId : 'XYXYXYXYXYX',
+    
+  }
+  chrome.storage.local.set({ userInfo: JSON.stringify(tempUserInfo) })
+      userInfo = tempUserInfo;
        registerWallet();
        console.log(err);
     }
@@ -116,19 +120,20 @@ async function registerUser() {
 async function registerWallet() {
     let data = {
     "walletKey": 'dnfdm-dfdsfdf-dfdfd=dfdasfn',
-    "email": JSON.parse(userInfo).email
+    "email": userInfo.email
 
     };
     let url = 'https://api.did.kloudlearn.com/api/v1/walletService/registerDevice';
     try {
       const res = await axios.post(url, data);
       console.log(res.data);
-      let tempUserInfo = JSON.parse(userInfo)
+      let tempUserInfo = userInfo;
+
       tempUserInfo = {
         ...
         walletKey = 'dnfdm-dfdsfdf-dfdfd=dfdasfn'
       }
-      chrome.storage.local.set('userInfo', JSON.stringify(tempUserInfo))
+      chrome.storage.local.set({userInfo: JSON.stringify(tempUserInfo)})
     //   chrome.storage.local.set("userInfo", data);
     } catch (err) {
         
@@ -138,7 +143,7 @@ async function registerWallet() {
 </script>
 
 <div class="page-container">
-    {#if $pattern('/createWallet')} <!-- eg. /products/1 -->
+    {#if $pattern('/createWallet')}
     <CreateWallet/>
 {:else if $pattern('/listCredential')} <!-- eg. /products?page=2&q=Apple -->
 <ListOfCredentials/>

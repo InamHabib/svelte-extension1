@@ -5,9 +5,7 @@
     "version": "1.0",
     "manifest_version": 3,
     "background" : {
-      "service_worker": "background.js",
-      "persistent": true
-
+      "service_worker": "background.js"
     },
     "icons": {
       "16": "images/bijay.jpeg",
