@@ -78,8 +78,6 @@ async function registerWallet() {
         email:username,
         walletKey:walletKey
       }
-
-      tempUserInfo.walletKey = walletKey;
       chrome.storage.local.set({userInfo: JSON.stringify(tempUserInfo)})
       goto('/listCredential');
     //   chrome.storage.local.set("userInfo", data);
