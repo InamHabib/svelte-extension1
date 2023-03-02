@@ -27,41 +27,41 @@
     }
     return result;
 }
-    async function registerUser() {
-        console.log("Inam")
-    let deviceId = makeid(7);
-    let data = {
-    deviceId: deviceId,
-    email: username
+//     async function registerUser() {
+//         console.log("Inam")
+//     let deviceId = makeid(7);
+//     let data = {
+//     deviceId: deviceId,
+//     email: username
 
-    };
-    let url = 'https://api.did.kloudlearn.com/api/v1/wallet/registerUser';
-    try {
-      const res = await axios.post(url, data);
-      console.log(res.data);
-      let tempUserInfo = {
+//     };
+//     let url = 'https://api.did.kloudlearn.com/api/v1/wallet/registerUser';
+//     try {
+//       const res = await axios.post(url, data);
+//       console.log(res.data);
+//       let tempUserInfo = {
       
-      email : username,
-      deviceId : deviceId,
+//       email : username,
+//       deviceId : deviceId,
     
-  }
-  chrome.storage.local.set({ userInfo: JSON.stringify(tempUserInfo) })
-      userInfo = tempUserInfo;
-      registerWallet();
-    //   chrome.storage.local.set("userInfo", data);
-    } catch (err) {
-      let tempUserInfo = {
+//   }
+//   chrome.storage.local.set({ userInfo: JSON.stringify(tempUserInfo) })
+//       userInfo = tempUserInfo;
+//       registerWallet();
+//     //   chrome.storage.local.set("userInfo", data);
+//     } catch (err) {
+//       let tempUserInfo = {
       
-      email : username,
-      deviceId : deviceId,
+//       email : username,
+//       deviceId : deviceId,
     
-  }
-  chrome.storage.local.set({ userInfo: JSON.stringify(tempUserInfo) })
-      userInfo = tempUserInfo;
-       registerWallet();
-       console.log(err);
-    }
-}
+//   }
+//   chrome.storage.local.set({ userInfo: JSON.stringify(tempUserInfo) })
+//       userInfo = tempUserInfo;
+//        registerWallet();
+//        console.log(err);
+//     }
+// }
 
 
 async function registerWallet() {
@@ -74,7 +74,10 @@ async function registerWallet() {
     try {
       const res = await axios.post(url, data);
       console.log(data);
-      let tempUserInfo = userInfo;
+      let tempUserInfo = {
+        email:username,
+        walletKey:walletKey
+      }
 
       tempUserInfo.walletKey = walletKey;
       chrome.storage.local.set({userInfo: JSON.stringify(tempUserInfo)})
@@ -100,7 +103,7 @@ async function registerWallet() {
 
         <Row>
             <Column>
-            <Button type="primary" on:click={(e)=>{e.preventDefault(),registerUser()}}>Login</Button>
+            <Button type="primary" on:click={(e)=>{e.preventDefault(),registerWallet()}}>Login</Button>
             </Column>
         </Row>
 
