@@ -53,9 +53,9 @@ console.log(data);
         <Column  class="data-container">
             {#if data && data.length > 0}
             {#each data as credential}
-            <Row class="data-tabs" onClick={()=>goto('/credentials')}>
+            <Row class="data-tabs">
                 <Column class="sub-tab2">
-                    <div class="card" onClick={()=>goto('/credential-detail')}>
+                    <div class="card" on:click={()=>goto('/credential-detail', {credential} )}>
                         <div class="image-container">
                             <img src="/images/share.svg" height="50px" width="50px" />
                         </div>
@@ -63,7 +63,7 @@ console.log(data);
                             <h4>Credential for {credential.credentialName}
                             </h4>
                             <span>Credential type: {credential.credentialDetail.vc.credentialSubject.credentialType} </span>
-                            <p>Issued at {moment(credential.credentialDetail.vc.issuanceDate).format('MM/DD/YYYY')} by {credential.issuerName}</p>
+                            <p>Issued at {credential.credentialDetail.vc.issuanceDate} by {credential.issuerName}</p>
                         </div>
                     </div>
                

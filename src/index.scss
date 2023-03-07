@@ -156,6 +156,7 @@ body{
             display: flex;
             flex-direction: column;
             margin-bottom: 1rem;
+
             .search-bar{
                 padding: 0;
                 margin-bottom: 1rem;
@@ -185,6 +186,7 @@ body{
                 padding-left: 0;
            
 
+                }
                 .data-tabs{
                     display: flex;
                     flex-direction: column;
@@ -303,8 +305,20 @@ body{
             font-size: 1em;
         }
 
-
+        .cred-detail-col{
+            .bx--label{
+                color: #000;
+            }
+            .bx--text-input{
+                background: none !important;
+                border: none;
+                border: 1px solid #ccc !important;
+                border-radius: 5px !important;
+                color: #000 !important;
+            }
+            margin-bottom: 0.5rem;
+            }
     }
-}
+
 
 
