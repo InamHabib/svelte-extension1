@@ -27,21 +27,23 @@ async function pollCredential() {
       })
         .then((response) => response.json())
         .then((res) => {
-          console.log(data); // JSON data parsed by `data.json()` call
-    let tempCredentials;
+          console.log(res); // JSON data parsed by `data.json()` call
+    let tempCredentials=[];
     chrome.storage.local.get(["credentials"]).then((result) => {
       tempCredentials = JSON.parse(result.credentials);
     })
-    if(tempCredentials && tempCredentials.length)
+    tempCredentials.push(res.credentials[0])
+    if(res && res.credentials[0])
     {
-    tempCredentials.push(res.data.credentials[0])
+  
+    if(res.credentials)
     chrome.notifications.create(
       // "drink_water",
       {
           type: "basic",
           iconUrl: "images/logo.png",
           title: "Authnull",
-          message: `Credential have been assigned to you by ${res.data.credentials[0].issuerId}`,
+          message: `Credential have been assigned to you by ${res.credentials[0].issuerId}`,
           silent: false
       },
       () => { }

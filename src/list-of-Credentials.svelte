@@ -1,5 +1,7 @@
 <script>
 import { goto } from "svelte-pathfinder";
+import parseJWT from './parseJWT.js';
+import {moment} from 'moment'
 import {
     Button,
     Link,
@@ -19,7 +21,13 @@ let selected="All"
 let data;
 chrome.storage.local.get(["credentials"]).then((result) => {
  data = result && result.credentials && JSON.parse(result.credentials)
+ for(let i=0; i<data.length; i++)
+ {
+    data[i].credentialDetail = parseJWT(data[i].jwt)
+ }
+console.log(data);
 })
+
 
 
 </script>
@@ -47,15 +55,15 @@ chrome.storage.local.get(["credentials"]).then((result) => {
             {#each data as credential}
             <Row class="data-tabs" onClick={()=>goto('/credentials')}>
                 <Column class="sub-tab2">
-                    <div class="card">
+                    <div class="card" onClick={()=>goto('/credential-detail')}>
                         <div class="image-container">
                             <img src="/images/share.svg" height="50px" width="50px" />
                         </div>
                         <div class="content-container">
-                            <h4>Credential for {credential.name}
+                            <h4>Credential for {credential.credentialName}
                             </h4>
-                            <span>Credential type: SSH Keys </span>
-                            <p>Issued at 5.45pm by Broardcom</p>
+                            <span>Credential type: {credential.credentialDetail.vc.credentialSubject.credentialType} </span>
+                            <p>Issued at {moment(credential.credentialDetail.vc.issuanceDate).format('MM/DD/YYYY')} by {credential.issuerName}</p>
                         </div>
                     </div>
                
@@ -66,7 +74,6 @@ chrome.storage.local.get(["credentials"]).then((result) => {
             {/each}
             {/if}
         </Column>
-
     </Row>
    
     {/if}
