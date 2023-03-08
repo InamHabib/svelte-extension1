@@ -147,34 +147,15 @@ async function pollCredentialRequest() {
               type: "basic",
               iconUrl: "images/logo.png",
               title: "Authnull",
-              message: `Credential have been assigned to you by ${res.credentials[0].issuerName}`,
+              message: `You have recieved a credential request`,
               silent: false,
-              buttons: [
-                {
-                  title: "Accept",
-                  iconUrl: "",
-                },
-                {
-                  title: "Reject",
-                  iconUrl: "",
-                },
-              ],
+             
             },
-            (id) => {
-              myNotificationID = id;
+            () => {
+              
             }
           );
-          chrome.notifications.onButtonClicked.addListener(function (
-            notifId,
-            btnIdx
-          ) {
-            if (notifId === myNotificationID) {
-              if (btnIdx === 0) {
-                window.open("google.com");
-              } else if (btnIdx === 1) {
-              }
-            }
-          });
+
         })
         .catch((error) => {});
     }

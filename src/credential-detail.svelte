@@ -34,7 +34,7 @@
           ><TextInput
             light
             labelText="Credential Name"
-            value=""
+            value="Credential Name"
             disabled
           /></Column
         >
