@@ -7,11 +7,12 @@ function handleAlarm(alarmInfo) {
   pollCredential();
   pollCredentialRequest();
 }
-
+let currentCredential;
+let userInfo;
 async function pollCredential() {
   // Default options are marked with *
   chrome.storage.local.get(["userInfo"]).then((result) => {
-    let userInfo = result && result.userInfo && JSON.parse(result.userInfo);
+    userInfo = result && result.userInfo && JSON.parse(result.userInfo);
     if (userInfo) {
       console.log(userInfo);
       let data = { walletKey: userInfo.walletKey, email: userInfo.email };
@@ -28,43 +29,107 @@ async function pollCredential() {
         .then((response) => response.json())
         .then((res) => {
           console.log(res); // JSON data parsed by `data.json()` call
-          let tempCredentials = [];
-          chrome.storage.local.get(["credentials"]).then((result) => {
-            tempCredentials = JSON.parse(result.credentials);
-          });
-          tempCredentials.push(res.credentials[0]);
-          if (res && res.credentials[0]) {
-            if (res.credentials)
-              chrome.notifications.create(
-                // "drink_water",
-                {
-                  type: "basic",
-                  iconUrl: "images/logo.png",
-                  title: "Authnull",
-                  message: `Credential have been assigned to you by ${res.credentials[0].issuerId}`,
-                  silent: false,
-                },
-                () => {}
-              );
-          } else {
-            tempCredentials = [];
+
+          currentCredential = res.credentials[0];
+          if (currentCredential) {
+            chrome.notifications.create(
+              {
+                type: "basic",
+                iconUrl: "images/logo.png",
+                title: "Authnull",
+                message: `Credential have been assigned to you by ${res.credentials[0].issuerName}`,
+                silent: false,
+                buttons: [
+                  {
+                    title: "Accept",
+                    iconUrl: "",
+                  },
+                  {
+                    title: "Reject",
+                    iconUrl: "",
+                  },
+                ],
+              },
+              (id) => {
+                assigned = id;
+              }
+            );
           }
-          chrome.storage.local.set({
-            credentials: JSON.stringify(tempCredentials),
-          });
         })
         .catch((error) => {});
     }
   });
 }
-
+chrome.notifications.onButtonClicked.addListener(function (notifId, btnIdx) {
+  if (notifId === assigned) {
+    if (btnIdx === 0) {
+      let data = {
+        walletId: userInfo.walletId,
+        userId: userInfo.userId,
+        credentialId: currentCredential.credentialId,
+        accept: true,
+      };
+      fetch(
+        "https://api.did.kloudlearn.com/api/v1/walletService/acknowledgeCredential",
+        {
+          method: "POST", // or 'PUT'
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      ).then((res) => {
+        let tempCredentials = [];
+        chrome.storage.local.get(["credentials"]).then((result) => {
+          tempCredentials = JSON.parse(result.credentials);
+        });
+        tempCredentials.push(currentCredential);
+        chrome.storage.local.set({
+          credentials: JSON.stringify(tempCredentials),
+        });
+        chrome.notifications.create(
+          {
+            type: "basic",
+            iconUrl: "images/logo.png",
+            title: "Authnull",
+            message: `Credential assigned by ${currentCredential.issuerName} has been successfully stored`,
+            silent: false,
+          },
+          () => {}
+        );
+      });
+    } else if (btnIdx === 1) {
+      let data = {
+        walletId: userInfo.walletId,
+        userId: userInfo.userId,
+        credentialId: currentCredential.credentialId,
+        accept: false,
+      };
+      fetch(
+        "https://api.did.kloudlearn.com/api/v1/walletService/acknowledgeCredential",
+        {
+          method: "POST", // or 'PUT'
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+    }
+  }
+});
 async function pollCredentialRequest() {
   // Default options are marked with *
   chrome.storage.local.get(["userInfo"]).then((result) => {
     let userInfo = result && result.userInfo && JSON.parse(result.userInfo);
     if (userInfo) {
       console.log(userInfo);
-      let data = { walletKey: userInfo.walletKey, email: userInfo.email, walletId:userInfo.walletId, userId:userInfo.userId };
+      let data = {
+        walletKey: userInfo.walletKey,
+        email: userInfo.email,
+        walletId: userInfo.walletId,
+        userId: userInfo.userId,
+      };
       fetch(
         "https://api.did.kloudlearn.com/api/v1/walletService/pollPresentationRequest",
         {
@@ -77,7 +142,39 @@ async function pollCredentialRequest() {
       )
         .then((response) => response.json())
         .then((res) => {
-          console.log(res); // JSON data parsed by `data.json()` call
+          chrome.notifications.create(
+            {
+              type: "basic",
+              iconUrl: "images/logo.png",
+              title: "Authnull",
+              message: `Credential have been assigned to you by ${res.credentials[0].issuerName}`,
+              silent: false,
+              buttons: [
+                {
+                  title: "Accept",
+                  iconUrl: "",
+                },
+                {
+                  title: "Reject",
+                  iconUrl: "",
+                },
+              ],
+            },
+            (id) => {
+              myNotificationID = id;
+            }
+          );
+          chrome.notifications.onButtonClicked.addListener(function (
+            notifId,
+            btnIdx
+          ) {
+            if (notifId === myNotificationID) {
+              if (btnIdx === 0) {
+                window.open("google.com");
+              } else if (btnIdx === 1) {
+              }
+            }
+          });
         })
         .catch((error) => {});
     }
