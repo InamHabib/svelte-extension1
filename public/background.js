@@ -52,72 +52,74 @@ async function pollCredential() {
               },
               (id) => {
                 assigned = id;
+
               }
             );
+            chrome.notifications.onButtonClicked.addListener(function (notifId, btnIdx) {
+              if (notifId === assigned) {
+                if (btnIdx === 0) {
+                  let data = {
+                    walletId: userInfo.walletId,
+                    userId: userInfo.userId,
+                    credentialId: currentCredential.credentialId,
+                    accept: true,
+                  };
+                  fetch(
+                    "https://api.did.kloudlearn.com/api/v1/walletService/acknowledgeCredential",
+                    {
+                      method: "POST", // or 'PUT'
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(data),
+                    }
+                  ).then((res) => {
+                    let tempCredentials = [];
+                    chrome.storage.local.get(["credentials"]).then((result) => {
+                      tempCredentials = JSON.parse(result.credentials);
+                    });
+                    tempCredentials.push(currentCredential);
+                    chrome.storage.local.set({
+                      credentials: JSON.stringify(tempCredentials),
+                    });
+                    chrome.notifications.create(
+                      {
+                        type: "basic",
+                        iconUrl: "images/logo.png",
+                        title: "Authnull",
+                        message: `Credential assigned by ${currentCredential.issuerName} has been successfully stored`,
+                        silent: false,
+                      },
+                      () => {}
+                    );
+                  });
+                } else if (btnIdx === 1) {
+                  let data = {
+                    walletId: userInfo.walletId,
+                    userId: userInfo.userId,
+                    credentialId: currentCredential.credentialId,
+                    accept: false,
+                  };
+                  fetch(
+                    "https://api.did.kloudlearn.com/api/v1/walletService/acknowledgeCredential",
+                    {
+                      method: "POST", // or 'PUT'
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(data),
+                    }
+                  );
+                }
+              }
+            });
           }
         })
         .catch((error) => {});
     }
   });
 }
-chrome.notifications.onButtonClicked.addListener(function (notifId, btnIdx) {
-  if (notifId === assigned) {
-    if (btnIdx === 0) {
-      let data = {
-        walletId: userInfo.walletId,
-        userId: userInfo.userId,
-        credentialId: currentCredential.credentialId,
-        accept: true,
-      };
-      fetch(
-        "https://api.did.kloudlearn.com/api/v1/walletService/acknowledgeCredential",
-        {
-          method: "POST", // or 'PUT'
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      ).then((res) => {
-        let tempCredentials = [];
-        chrome.storage.local.get(["credentials"]).then((result) => {
-          tempCredentials = JSON.parse(result.credentials);
-        });
-        tempCredentials.push(currentCredential);
-        chrome.storage.local.set({
-          credentials: JSON.stringify(tempCredentials),
-        });
-        chrome.notifications.create(
-          {
-            type: "basic",
-            iconUrl: "images/logo.png",
-            title: "Authnull",
-            message: `Credential assigned by ${currentCredential.issuerName} has been successfully stored`,
-            silent: false,
-          },
-          () => {}
-        );
-      });
-    } else if (btnIdx === 1) {
-      let data = {
-        walletId: userInfo.walletId,
-        userId: userInfo.userId,
-        credentialId: currentCredential.credentialId,
-        accept: false,
-      };
-      fetch(
-        "https://api.did.kloudlearn.com/api/v1/walletService/acknowledgeCredential",
-        {
-          method: "POST", // or 'PUT'
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
-    }
-  }
-});
+
 async function pollCredentialRequest() {
   // Default options are marked with *
   chrome.storage.local.get(["userInfo"]).then((result) => {
