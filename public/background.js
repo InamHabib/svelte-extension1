@@ -2,6 +2,15 @@ chrome.alarms.create({
   delayInMinutes: 0.17,
   periodInMinutes: 0.17,
 });
+function parseJwt (token) {
+  var base64Url = token.split('.')[1];
+  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+
+  return JSON.parse(jsonPayload);
+}
 
 function handleAlarm(alarmInfo) {
   pollCredential();
@@ -14,7 +23,6 @@ async function pollCredential() {
   chrome.storage.local.get(["userInfo"]).then((result) => {
     userInfo = result && result.userInfo && JSON.parse(result.userInfo);
     if (userInfo) {
-      console.log(userInfo);
       let data = { walletKey: userInfo.walletKey, email: userInfo.email };
       fetch(
         "https://api.did.kloudlearn.com/api/v1/walletService/pollCredentials",
@@ -28,7 +36,7 @@ async function pollCredential() {
       )
         .then((response) => response.json())
         .then((res) => {
-          console.log(res); // JSON data parsed by `data.json()` call
+        
 
           currentCredential = res.credentials[0];
           if (currentCredential) {
@@ -52,10 +60,12 @@ async function pollCredential() {
               },
               (id) => {
                 assigned = id;
-
               }
             );
-            chrome.notifications.onButtonClicked.addListener(function (notifId, btnIdx) {
+            chrome.notifications.onButtonClicked.addListener(function (
+              notifId,
+              btnIdx
+            ) {
               if (notifId === assigned) {
                 if (btnIdx === 0) {
                   let data = {
@@ -125,7 +135,6 @@ async function pollCredentialRequest() {
   chrome.storage.local.get(["userInfo"]).then((result) => {
     let userInfo = result && result.userInfo && JSON.parse(result.userInfo);
     if (userInfo) {
-      console.log(userInfo);
       let data = {
         walletKey: userInfo.walletKey,
         email: userInfo.email,
@@ -144,6 +153,17 @@ async function pollCredentialRequest() {
       )
         .then((response) => response.json())
         .then((res) => {
+          let tempCredentialRequest;
+          let tempCredentialsFiltered = [];
+
+          if(res && res.input_descriptors && res.input_descriptors.length > 0)
+          {
+            tempCredentialRequest =  res.input_descriptors[0].constraints &&  res.input_descriptors[0].constraints.fields
+          }
+          chrome.storage.local.set({
+            credentialRequest: JSON.stringify(tempCredentialRequest),
+          });
+
           chrome.notifications.create(
             {
               type: "basic",
@@ -151,13 +171,9 @@ async function pollCredentialRequest() {
               title: "Authnull",
               message: `You have recieved a credential request`,
               silent: false,
-             
             },
-            () => {
-              
-            }
+            () => {}
           );
-
         })
         .catch((error) => {});
     }
