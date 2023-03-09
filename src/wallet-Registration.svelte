@@ -73,15 +73,14 @@ async function registerWallet() {
     let url = 'https://api.did.kloudlearn.com/api/v1/walletService/registerDevice';
     try {
       const res = await axios.post(url, data);
-      console.log(data);
+      console.log(res);
       let tempUserInfo = {
         email:username,
         walletKey:walletKey,
-        holderDid:data.holderDid,
-        secretKey: data.secretKey,
-        walletId:data.walletId,
-        userId:data.userId
-
+        holderDid:res.data.holderDid,
+        secretKey: res.data.secretKey,
+        walletId:res.data.walletId,
+        userId:res.data.userId
       }
       
       chrome.storage.local.set({userInfo: JSON.stringify(tempUserInfo)})
