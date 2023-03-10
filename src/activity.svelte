@@ -1,193 +1,87 @@
 <script>
-    import { goto } from "svelte-pathfinder";
-    import { onMount } from "svelte";
-    import {
-        Button,
-        Link,
-        Loading,
-        TextArea,
-        TextInput,
-        Row,
-        Column,
-        Search,
-        Tab,
-        Tabs,
-        TabContent,
-    } from "carbon-components-svelte";
-    import {
-    CheckmarkFilled,
-    CloseFilled
+  import { goto } from "svelte-pathfinder";
+  import { onMount } from "svelte";
+  import {
+    Button,
+    Link,
+    Loading,
+    TextArea,
+    TextInput,
+    Row,
+    Column,
+    Search,
+    Tab,
+    Tabs,
+    TabContent,
+  } from "carbon-components-svelte";
+  import parseJwt from "./parseJWT";
+  import { CheckmarkFilled, CloseFilled } from "carbon-icons-svelte";
+  let selected = "All";
+  let data;
+  chrome.storage.local.get(["credentialNotification"]).then((result) => {
+    data =
+      result &&
+      result.credentialNotification &&
+      JSON.parse(result.credentialNotification);
+    if (data && data.length > 0) {
+      for (let i = 0; i < data.length; i++) {
+        data[i].credentialDetail = parseJwt(data[i].jwt);
+      }
+    }
+  });
+</script>
 
-} from "carbon-icons-svelte"
-    let selected="All"
-    
+<div class="list-of-credentials">
+  <Row>
+    <Column class="title-container">
+      <h1>Activity Log</h1>
+    </Column>
+  </Row>
 
-    
-    </script>
-    
-    <div class="list-of-credentials">
-        <Row>
-            <Column class="title-container">
-            <h1>Activity Log</h1>
-            </Column>
+  <Row>
+    <Column class="search-bar">
+      <Search size="sm" />
+    </Column>
+  </Row>
+  <Row>
+    <Column class="data-container">
+    {#if data && data.length > 0}
+      {#each data as notification}
+        <Row
+          class="data-tabs"
+         
+        >
+          <Column class="sub-tab2">
+            <div class="card"  on:click={() => {
+                console.log("INAM")
+                chrome.storage.local.set({
+                  currentAssignment: JSON.stringify(notification),
+                })
+                goto("/asignedCredential");
+              }}>
+              <div class="image-container">
+                {#if notification.status === "approved"}
+                  <CheckmarkFilled size={50} class="approved" />
+                {:else if notification.status === "denied"}
+                  <CloseFilled size={50} class="denied" />
+                {/if}
+              </div>
+              <div class="content-container">
+                <h4>{notification.message}</h4>
+                <span
+                  >Issued at {notification.credentialDetail.vc.issuanceDate} by
+                  {notification.issuerName}</span
+                >
+                <p class="user-type">
+                  Credential type: {notification.credentialDetail.vc
+                    .credentialSubject.credentialType}
+                </p>
+              </div>
+            </div>
+          </Column>
         </Row>
-        <Row class="tabs-container">
-            <Button class={selected == "All" ? "selected-tab" : ""} on:click={() => selected="All"} >All</Button>
-            <Button class={selected == "Server" ? "selected-tab" : ""} on:click={() => selected="Server"} >Server</Button>
-            <Button class={selected == "Groups" ? "selected-tab" : ""} on:click={() => selected="Groups"} >Groups</Button>
-        </Row>
-        <Row>
-            <Column class="search-bar">
-                <Search  size="sm" />
-            </Column>
-        </Row>
-    {#if selected=="All"}
-        <Row>
-            <Column  class="data-container">
-                {#each Array(5) as _, index (index)}
-                <Row class="data-tabs" onClick={()=>goto('/credentials')}>
-                    <Column class="sub-tab2">
-                        <div class="card">
-                            <div class="image-container">
-                                <CheckmarkFilled size={50} class="approved" />
-                            </div>
-                            <div class="content-container">
-                                <h4>Server Group #1 requested access to Password
-                                </h4>
-                                <span>2/2/2023 at 4:45pm</span>
-                    <p class="user-type">User Type: Active Directory</p>
-                            </div>
-                        </div>
-                   
-                    
-                    
-                    </Column>
-                </Row>
-                <Row class="data-tabs" onClick={()=>goto('/credentials')}>
-                    <Column class="sub-tab2">
-                        <div class="card">
-                            <div class="image-container">
-                                <CloseFilled size={50} class="denied" />
-                            </div>
-                            <div class="content-container">
-                                <h4 >Server Group #2 requested access to Password
-                                </h4>
-                                <span>2/2/2023 at 4:45pm</span>
-                    <p class="user-type">User Type: Active Directory</p>
-                            </div>
-                        </div>
-                   
-                    
-                    
-                    </Column>
-                </Row>
-                {/each}
-            </Column>
-    
-        </Row>
-       
-        {/if}
-
-        {#if selected=="Server"}
-        <Row>
-            <Column  class="data-container">
-                {#each Array(5) as _, index (index)}
-                <Row class="data-tabs" onClick={()=>goto('/credentials')}>
-                    <Column class="sub-tab2">
-                        <div class="card">
-                            <div class="image-container">
-                                <CheckmarkFilled size={50} class="approved" />
-                            </div>
-                            <div class="content-container">
-                                <h4 >Server  #1 requested access to Password
-                                </h4>
-                                <span>2/2/2023 at 4:45pm</span>
-                    <p class="user-type">User Type: Active Directory</p>
-                            </div>
-                        </div>
-                   
-                    
-                    
-                    </Column>
-                </Row>
-                <Row class="data-tabs" onClick={()=>goto('/credentials')}>
-                    <Column class="sub-tab2">
-                        <div class="card">
-                            <div class="image-container">
-                                <CloseFilled size={50} class="denied" />
-                            </div>
-                            <div class="content-container">
-                                <h4 >Server #2 requested access to Password
-                                </h4>
-                                <span>2/2/2023 at 4:45pm</span>
-                    <p class="user-type">User Type: Active Directory</p>
-                            </div>
-                        </div>
-                   
-                    
-                    
-                    </Column>
-                </Row>
-                {/each}
-            </Column>
-    
-        </Row>
-       
-        {/if}
-
-        {#if selected=="Groups"}
-        <Row>
-            <Column  class="data-container">
-                {#each Array(5) as _, index (index)}
-                <Row class="data-tabs" onClick={()=>goto('/credentials')}>
-                    <Column class="sub-tab2">
-                        <div class="card">
-                            <div class="image-container">
-                                <CheckmarkFilled size={50} class="approved" />
-                            </div>
-                            <div class="content-container">
-                                <h4 >Server Group #1 requested access to Password
-                                </h4>
-                                <span>2/2/2023 at 4:45pm</span>
-                    <p class="user-type">User Type: Active Directory</p>
-                            </div>
-                        </div>
-                   
-                    
-                    
-                    </Column>
-                </Row>
-                <Row class="data-tabs" onClick={()=>goto('/credentials')}>
-                    <Column class="sub-tab2">
-                        <div class="card">
-                            <div class="image-container">
-                                <CloseFilled size={50} class="denied" />
-                            </div>
-                            <div class="content-container">
-                                <h4 >Server  #1 requested access to Password
-                                </h4>
-                                <span>2/2/2023 at 4:45pm</span>
-                    <p class="user-type">User Type: Active Directory</p>
-                            </div>
-                        </div>
-                   
-                    
-                    
-                    </Column>
-                </Row>
-                {/each}
-            </Column>
-    
-        </Row>
-       
-        {/if}
-    
-    
-    
-    
-       
-    
-    
-    
-    </div>
-    
+      {/each}
+      {/if}
+    </Column>
+  </Row>
+</div>

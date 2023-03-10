@@ -2,12 +2,18 @@ chrome.alarms.create({
   delayInMinutes: 0.17,
   periodInMinutes: 0.17,
 });
-function parseJwt (token) {
-  var base64Url = token.split('.')[1];
-  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-  }).join(''));
+function parseJwt(token) {
+  var base64Url = token.split(".")[1];
+  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  var jsonPayload = decodeURIComponent(
+    window
+      .atob(base64)
+      .split("")
+      .map(function (c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
 
   return JSON.parse(jsonPayload);
 }
@@ -36,10 +42,22 @@ async function pollCredential() {
       )
         .then((response) => response.json())
         .then((res) => {
-        
-
           currentCredential = res.credentials[0];
           if (currentCredential) {
+            currentCredential.status = "pending";
+            currentCredential.message =  `Credential have been assigned to you by ${currentCredential.issuerName}`
+            let tempCredentialNotificationList = [];
+            chrome.storage.local.get(["credentialNotification"]).then((result) => {
+              tempCredentialNotificationList =
+                result &&
+                result.credentialNotification &&
+                JSON.parse(result.credentialNotification);
+            });
+            tempCredentialNotificationList.push(currentCredential);
+            chrome.storage.local.set({
+              credentialNotification: JSON.stringify(tempCredentialNotificationList),
+            });
+            console.log(tempCredentialNotificationList);
             chrome.notifications.create(
               {
                 type: "basic",
@@ -86,9 +104,22 @@ async function pollCredential() {
                   ).then((res) => {
                     let tempCredentials = [];
                     chrome.storage.local.get(["credentials"]).then((result) => {
-                      tempCredentials = result && result.credentials && JSON.parse(result.credentials);
+                      tempCredentials =
+                        result &&
+                        result.credentials &&
+                        JSON.parse(result.credentials);
                     });
-                    tempCredentials.push(currentCredential);
+                    if(tempCredentialNotificationList && tempCredentialNotificationList.length > 0)
+                    {
+                      for(let i =0; i <tempCredentialNotificationList; i++)
+                      {
+                        if(tempCredentialNotificationList[i].credentialId === currentCredential.credentialId)
+                        {
+                            tempCredentials.push(tempCredentialNotificationList);
+                        }
+                        
+                      }
+                    }
                     chrome.storage.local.set({
                       credentials: JSON.stringify(tempCredentials),
                     });
@@ -156,11 +187,15 @@ async function pollCredentialRequest() {
           let tempCredentialRequest;
           let tempCredentialsFiltered = [];
 
-          if(res && res.input_descriptors && res.input_descriptors.length > 0)
-          {
-            tempCredentialRequest =  res.input_descriptors[0].constraints &&  res.input_descriptors[0].constraints.fields
-            for(let i=0; i<tempCredentialRequest.length; i++)
-            {
+          if (
+            res &&
+            res.input_descriptors &&
+            res.input_descriptors.length > 0
+          ) {
+            tempCredentialRequest =
+              res.input_descriptors[0].constraints &&
+              res.input_descriptors[0].constraints.fields;
+            for (let i = 0; i < tempCredentialRequest.length; i++) {
               tempCredentialRequest.requestId = res.id;
             }
           }

@@ -44,6 +44,7 @@
   } from "carbon-icons-svelte";
   import Credentials from "./credentials.svelte";
   import CredentialDetail from "./credential-detail.svelte";
+  import AssignedCredential from "./assignedCredential.svelte";
 
   let userInfo;
   chrome.storage.local.get(["userInfo"]).then((result) => {
@@ -73,6 +74,9 @@
   {:else if $pattern("/shareCredential")}
     <!-- eg. /products?page=2&q=Apple -->
     <ShareCredentials />
+    {:else if $pattern("/asignedCredential")}
+    <!-- eg. /products?page=2&q=Apple -->
+    <AssignedCredential />
   {:else if $pattern("/credential-detail")}
     <CredentialDetail />
   {:else}
