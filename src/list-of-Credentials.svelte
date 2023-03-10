@@ -36,105 +36,51 @@
       <h1>Available Credentials</h1>
     </Column>
   </Row>
-  <Row class="tabs-container">
-    <Button
-      class={selected == "All" ? "selected-tab" : ""}
-      on:click={() => (selected = "All")}>All</Button
-    >
-    <Button
-      class={selected == "Server" ? "selected-tab" : ""}
-      on:click={() => (selected = "Server")}>Server</Button
-    >
-    <Button
-      class={selected == "Groups" ? "selected-tab" : ""}
-      on:click={() => (selected = "Groups")}>Groups</Button
-    >
-  </Row>
   <Row>
     <Column class="search-bar">
       <Search size="sm" />
     </Column>
   </Row>
-  {#if selected == "All"}
-    <Row>
-      <Column class="data-container">
-        {#if data && data.length > 0}
-          {#each data as credential}
-            <Row class="data-tabs">
-              <Column class="sub-tab2">
-                <div
-                  class="card"
-                  on:click={() => goto("/credential-detail", { credential })}
-                >
-                  <div class="image-container">
-                    <img src="/images/share.svg" height="50px" width="50px" />
+  <Row>
+    <Column class="data-container">
+      {#if data && data.length > 0}
+      {#each data as credential}
+      <Row>
+        <Column class="data-container">
+          {#if data && data.length > 0}
+            {#each data as credential}
+              <Row class="data-tabs">
+                <Column class="sub-tab2">
+                  <div
+                    class="card"
+                    on:click={() => goto("/credential-detail", { credential })}
+                  >
+                    <div class="image-container">
+                      <img src="/images/share.svg" height="50px" width="50px" />
+                    </div>
+                    <div class="content-container">
+                      <h4>Credential for {credential.credentialName}</h4>
+                      <span
+                        >Credential type: {credential.credentialDetail.vc
+                          .credentialSubject.credentialType}
+                      </span>
+                      <p>
+                        Issued at {credential.credentialDetail.vc.issuanceDate} by
+                        {credential.issuerName}
+                      </p>
+                    </div>
                   </div>
-                  <div class="content-container">
-                    <h4>Credential for {credential.credentialName}</h4>
-                    <span
-                      >Credential type: {credential.credentialDetail.vc
-                        .credentialSubject.credentialType}
-                    </span>
-                    <p>
-                      Issued at {credential.credentialDetail.vc.issuanceDate} by
-                      {credential.issuerName}
-                    </p>
-                  </div>
-                </div>
-              </Column>
-            </Row>
-          {/each}
-        {/if}
-      </Column>
-    </Row>
-  {/if}
+                </Column>
+              </Row>
+            {/each}
+          {/if}
+        </Column>
+      </Row>
+      {/each}
+      {/if}
+    </Column>
+  </Row>
 
-  {#if selected == "Server"}
-    <Row>
-      <Column class="data-container">
-        {#each data as credential}
-          <Row class="data-tabs" onClick={() => goto("/credentials")}>
-            <Column class="sub-tab2">
-              <div class="card">
-                <div class="image-container">
-                  <img src="/images/share.svg" height="50px" width="50px" />
-                </div>
-                <div class="content-container">
-                  <h4 on:click={() => handleNotification()}>
-                    Credential for {credential.name}
-                  </h4>
-                  <span>Credential type: SSH Keys </span>
-                  <p>Issued at 3.45pm by Broardcom</p>
-                </div>
-              </div>
-            </Column>
-          </Row>
-        {/each}
-      </Column>
-    </Row>
-  {/if}
-  {#if selected == "Groups"}
-    <Row>
-      <Column class="data-container">
-        {#each data as credential}
-          <Row class="data-tabs" onClick={() => goto("/credentials")}>
-            <Column class="sub-tab2">
-              <div class="card">
-                <div class="image-container">
-                  <img src="/images/share.svg" height="50px" width="50px" />
-                </div>
-                <div class="content-container">
-                  <h4 on:click={() => handleNotification()}>
-                    Credential for {credential.name}
-                  </h4>
-                  <span>Credential type: SSH Keys </span>
-                  <p>Issued at 4.45pm by Broardcom</p>
-                </div>
-              </div>
-            </Column>
-          </Row>
-        {/each}
-      </Column>
-    </Row>
-  {/if}
+
+
 </div>

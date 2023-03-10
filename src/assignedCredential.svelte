@@ -45,7 +45,19 @@
         },
         body: JSON.stringify(data),
       }
-    ).then((res) => {});
+    ).then((res) => {
+      let tempCredentials = [];
+      let tempCurrentAssignment = currentAssignment;
+      tempCurrentAssignment.credentialDetail = null;
+      chrome.storage.local.get(["credentials"]).then((result) => {
+        tempCredentials = result && result.credentials && JSON.parse(result.credentials);
+      });
+      tempCredentials.push(tempCurrentAssignment);
+      console.log(tempCredentials);
+      chrome.storage.local.set({
+        credentials: JSON.stringify(tempCredentials),
+      });
+    });
   };
 
   const denyCredential = () => {
@@ -67,29 +79,41 @@
     ).then((res) => {});
   };
 </script>
-{#if currentAssignment}
 
-<div class="share-container">
-  <div class="top">
-    <h1>{currentAssignment.message}</h1>
-    <p>
-      Credential type: {currentAssignment.credentialDetail.vc.credentialSubject
-        .credentialType}
-    </p>
-    <div class="image-container">
-      <img src="/images/share.svg" width="100px" height="100px" />
+{#if currentAssignment}
+  <div class="share-container">
+    <div class="top">
+      <h1>{currentAssignment.message}</h1>
+      <p>
+        Credential type: {currentAssignment.credentialDetail.vc
+          .credentialSubject.credentialType}
+      </p>
+      <div class="image-container">
+        <img src="/images/share.svg" width="100px" height="100px" />
+      </div>
     </div>
-  </div>
-  <div class="bottom">
-    <!-- <div class="image-container">
+    <div class="bottom">
+      <!-- <div class="image-container">
           <NotificationFilled size={64} />
       </div> -->
-    <h2>Press accept if you would like to store these credentials</h2>
-    <h5>If you press accept the receiving resource will authenticate you</h5>
-    <div class="button-container">
-      <Button type="primary" on:click={() => {acceptCredential(); goto('/listCredential')}}>Accept</Button>
-      <Button kind="ghost" on:click={()=>{denyCredential(); goto('/listCredential')}}>Decline</Button>
+      <h2>Press accept if you would like to store these credentials</h2>
+      <h5>If you press accept the receiving resource will authenticate you</h5>
+      <div class="button-container">
+        <Button
+          type="primary"
+          on:click={() => {
+            acceptCredential();
+            goto("/listCredential");
+          }}>Accept</Button
+        >
+        <Button
+          kind="ghost"
+          on:click={() => {
+            denyCredential();
+            goto("/listCredential");
+          }}>Decline</Button
+        >
+      </div>
     </div>
   </div>
-</div>
 {/if}

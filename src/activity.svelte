@@ -15,7 +15,7 @@
     TabContent,
   } from "carbon-components-svelte";
   import parseJwt from "./parseJWT";
-  import { CheckmarkFilled, CloseFilled } from "carbon-icons-svelte";
+  import { CheckmarkFilled, CloseFilled,WarningAlt } from "carbon-icons-svelte";
   let selected = "All";
   let data;
   chrome.storage.local.get(["credentialNotification"]).then((result) => {
@@ -64,6 +64,8 @@
                   <CheckmarkFilled size={50} class="approved" />
                 {:else if notification.status === "denied"}
                   <CloseFilled size={50} class="denied" />
+                  {:else}
+                  <WarningAlt size={50} class="pending" />
                 {/if}
               </div>
               <div class="content-container">
