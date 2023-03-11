@@ -47,13 +47,31 @@
       }
     ).then((res) => {
       let tempCredentials = [];
+      let tempNotifications = [];
       let tempCurrentAssignment = currentAssignment;
       tempCurrentAssignment.credentialDetail = null;
       chrome.storage.local.get(["credentials"]).then((result) => {
-        tempCredentials = result && result.credentials && JSON.parse(result.credentials);
+        tempCredentials =
+          result && result.credentials && JSON.parse(result.credentials);
+      });
+      chrome.storage.local.get(["credentialNotification"]).then((result) => {
+        tempNotifications =
+          result &&
+          result.credentialNotification &&
+          JSON.parse(result.credentialNotification);
       });
       tempCredentials.push(tempCurrentAssignment);
-      console.log(tempCredentials);
+      for (let i = 0; i < tempNotifications.length; i++) {
+        if (
+          tempNotifications[i].credentialId === currentAssignment.credentialId
+        ) {
+          tempNotifications[i].status = "approved";
+        }
+      }
+      console.log(tempNotifications);
+      chrome.storage.local.set({
+        credentialNotification: JSON.stringify(tempNotifications),
+      });
       chrome.storage.local.set({
         credentials: JSON.stringify(tempCredentials),
       });

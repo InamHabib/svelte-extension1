@@ -47,12 +47,13 @@ async function pollCredential() {
             currentCredential.status = "pending";
             currentCredential.message =  `Credential have been assigned to you by ${currentCredential.issuerName}`
             let tempCredentialNotificationList = [];
-            chrome.storage.local.get(["credentialNotification"]).then((result) => {
+            chrome.storage.local.get("credentialNotification", function(result) {
               tempCredentialNotificationList =
-                result &&
-                result.credentialNotification &&
-                JSON.parse(result.credentialNotification);
+              result &&
+              result.credentialNotification &&
+              JSON.parse(result.credentialNotification);
             });
+
             tempCredentialNotificationList.push(currentCredential);
             chrome.storage.local.set({
               credentialNotification: JSON.stringify(tempCredentialNotificationList),
