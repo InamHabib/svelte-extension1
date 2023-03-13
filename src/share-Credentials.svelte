@@ -10,19 +10,29 @@
     Column,
     FileUploader,
   } from "carbon-components-svelte";
-  import {signPresentation, createPresentation, defaultDocumentLoader} from "@digitalbazaar/vc";
+  import {
+    signPresentation,
+    createPresentation,
+    defaultDocumentLoader,
+  } from "@digitalbazaar/vc";
 
   import { onMount } from "svelte";
   import { goto } from "svelte-pathfinder";
   import parseJwt from "./parseJWT";
   import { Add, Upload, NotificationFilled } from "carbon-icons-svelte";
+  import { Ed25519VerificationKey2020 } from "@digitalbazaar/ed25519-verification-key-2020";
+  import { Ed25519Signature2020 } from "@digitalbazaar/ed25519-signature-2020";
+  import { CryptoLD } from "crypto-ld";
+  import { X25519KeyAgreementKey2020 } from "@digitalbazaar/x25519-key-agreement-key-2020";
   let tempCredentials;
   let tempCredentialRequest;
   let tempCredentialsFiltered = [];
   let userInfo;
+  let fingerPrint;
   chrome.storage.local.get(["userInfo"]).then((result) => {
     userInfo = JSON.parse(result.userInfo);
   });
+
   onMount(async () => {
     chrome.storage.local.get(["credentialRequest"]).then((result) => {
       tempCredentialRequest = JSON.parse(result.credentialRequest);
@@ -60,13 +70,31 @@
     });
   });
 
-  const submitPresentation = () => {
-    console.log(tempCredentialRequest, userInfo)
+  async function submitPresentation() {
     const id = tempCredentialRequest[0].requestId;
-    const holder = userInfo.secretKey;
-    const suite = holder;
+    const holder = userInfo.holderDid;
     const verifiableCredential = tempCredentialsFiltered[0].credentialDetail.vc;
-    console.log(id, suite, holder, verifiableCredential)
+    const cryptoLd = new CryptoLD();
+
+    cryptoLd.use(Ed25519VerificationKey2020);
+    cryptoLd.use(X25519KeyAgreementKey2020);
+
+    let keyPair = await cryptoLd.generate({
+      type: "Ed25519VerificationKey2020",
+    });
+    keyPair.id = `${holder}${keyPair.fingerprint()}`; // See Key ID section
+    const controllerDoc = {
+      "@context": "https://w3c-ccg.github.io/security-vocab/contexts/security-v2.jsonld",
+      id: holder,
+      assertionMethod: [keyPair.id],
+    };
+    keyPair.controller = controllerDoc; // See Controller Document section
+
+    const suite = new Ed25519Signature2020({
+      verificationMethod: keyPair.id,
+      key: keyPair,
+    });
+    console.log(id, suite, holder, verifiableCredential);
     const presentation = createPresentation({
       verifiableCredential,
       id,
@@ -74,6 +102,7 @@
     });
     const challenge = "authnull";
     const documentLoader = defaultDocumentLoader;
+    console.log(documentLoader, "Inam")
     const vp = signPresentation({
       presentation,
       suite,
@@ -81,7 +110,7 @@
       documentLoader,
     });
     console.log(vp);
-  };
+  }
 </script>
 
 <div class="share-container">

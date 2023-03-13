@@ -117,9 +117,10 @@ async function pollCredentialRequest() {
               res.input_descriptors[0].constraints &&
               res.input_descriptors[0].constraints.fields;
             for (let i = 0; i < tempCredentialRequest.length; i++) {
-              tempCredentialRequest.requestId = res.id;
+              tempCredentialRequest[i].requestId = res.id;
             }
           }
+          console.log(tempCredentialRequest);
 
           chrome.storage.local.set({
             credentialRequest: JSON.stringify(tempCredentialRequest),

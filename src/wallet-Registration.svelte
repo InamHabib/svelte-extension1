@@ -106,7 +106,7 @@ async function registerWallet() {
 
         <Row>
             <Column>
-            <Button type="primary" on:click={(e)=>{e.preventDefault(),registerWallet()}}>Login</Button>
+            <Button type="primary" on:click={(e)=>{e.preventDefault(),registerWallet()}}>Register</Button>
             </Column>
         </Row>
 
