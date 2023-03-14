@@ -59,11 +59,16 @@
               <div
                 class="card"
                 on:click={() => {
-                  console.log("INAM");
-                  chrome.storage.local.set({
-                    currentAssignment: JSON.stringify(notification),
-                  });
-                  goto("/asignedCredential");
+                  if (
+                    notification.status !== "approved" &&
+                    notification.status !== "denied"
+                  ) {
+                    console.log("INAM");
+                    chrome.storage.local.set({
+                      currentAssignment: JSON.stringify(notification),
+                    });
+                    goto("/asignedCredential");
+                  }
                 }}
               >
                 <div class="image-container">
