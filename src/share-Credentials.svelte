@@ -15,7 +15,8 @@
     createPresentation,
     defaultDocumentLoader,
   } from "@digitalbazaar/vc";
-
+  import customContext from "./customContext";
+  import {extendContextLoader} from 'jsonld-signatures';
   import { onMount } from "svelte";
   import { goto } from "svelte-pathfinder";
   import parseJwt from "./parseJWT";
@@ -84,7 +85,7 @@
     });
     keyPair.id = `${holder}${keyPair.fingerprint()}`; // See Key ID section
     const controllerDoc = {
-      "@context": "https://w3c-ccg.github.io/security-vocab/contexts/security-v2.jsonld",
+      "@context": "https://client.did.kloudlearn.com/public/security-v2.jsonld",
       id: holder,
       assertionMethod: [keyPair.id],
     };
@@ -101,15 +102,21 @@
       holder,
     });
     const challenge = "authnull";
-    const documentLoader = defaultDocumentLoader;
-    console.log(documentLoader, "Inam")
-    const vp = signPresentation({
-      presentation,
-      suite,
-      challenge,
-      documentLoader,
+    const documentLoader = extendContextLoader(async (url) => {
+      return {
+        contextUrl: null,
+        documentUrl: url,
+        document: customContext,
+      };
     });
-    console.log(vp);
+    console.log(presentation, "Inam");
+    // const vp = signPresentation({
+    //   presentation,
+    //   suite,
+    //   challenge,
+    //   documentLoader
+    // });
+    // console.log(vp);
   }
 </script>
 

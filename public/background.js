@@ -45,36 +45,41 @@ async function pollCredential() {
           currentCredential = res.credentials[0];
           if (currentCredential) {
             currentCredential.status = "pending";
-            currentCredential.message =  `Credential have been assigned to you by ${currentCredential.issuerName}`
+            currentCredential.message = `Credential have been assigned to you by ${currentCredential.issuerName}`;
             let tempCredentialNotificationList = [];
-            chrome.storage.local.get("credentialNotification", function(result) {
-              tempCredentialNotificationList =
-              result &&
-              result.credentialNotification &&
-              JSON.parse(result.credentialNotification);
+            chrome.storage.local
+              .get(["credentialNotification"])
+              .then((result) => {
+                tempCredentialNotificationList =
+                  result &&
+                  result.credentialNotification &&
+                  JSON.parse(result.credentialNotification);
+                if (
+                  tempCredentialNotificationList &&
+                  tempCredentialNotificationList.length > 0
+                ) {
+                  tempCredentialNotificationList.push(currentCredential);
+                } else {
+                  tempCredentialNotificationList = [currentCredential];
+                }
+                console.log(tempCredentialNotificationList);
+                chrome.storage.local.set({
+                  credentialNotification: JSON.stringify(
+                    tempCredentialNotificationList
+                  ),
+                });
+              });
+            chrome.notifications.create({
+              type: "basic",
+              iconUrl: "images/logo.png",
+              title: "Authnull",
+              message: `Credential have been assigned to you by ${res.credentials[0].issuerName}`,
+              silent: false,
             });
-
-            tempCredentialNotificationList.push(currentCredential);
-            chrome.storage.local.set({
-              credentialNotification: JSON.stringify(tempCredentialNotificationList),
-            });
-            console.log(tempCredentialNotificationList);
-            chrome.notifications.create(
-              {
-                type: "basic",
-                iconUrl: "images/logo.png",
-                title: "Authnull",
-                message: `Credential have been assigned to you by ${res.credentials[0].issuerName}`,
-                silent: false,
-               
-              }
-            );
             chrome.notifications.onButtonClicked.addListener(function (
               notifId,
               btnIdx
-            ) {
-              
-            });
+            ) {});
           }
         })
         .catch((error) => {});

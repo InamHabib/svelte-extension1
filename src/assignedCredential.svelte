@@ -20,6 +20,7 @@
   import { goto } from "svelte-pathfinder";
   import parseJwt from "./parseJWT";
   import { Add, Upload, NotificationFilled } from "carbon-icons-svelte";
+  import { concat } from "jsonld-signatures/lib/util";
   let currentAssignment;
   let userInfo;
   chrome.storage.local.get(["userInfo"]).then((result) => {
@@ -36,6 +37,7 @@
       credentialId: currentAssignment.credentialId,
       accept: true,
     };
+
     fetch(
       "https://api.did.kloudlearn.com/api/v1/walletService/acknowledgeCredential",
       {
@@ -46,34 +48,47 @@
         body: JSON.stringify(data),
       }
     ).then((res) => {
-      let tempCredentials = [];
+      // Testing Only
+      goto("/listCredential");
+      let tempCredentials;
       let tempNotifications = [];
       let tempCurrentAssignment = currentAssignment;
       tempCurrentAssignment.credentialDetail = null;
       chrome.storage.local.get(["credentials"]).then((result) => {
         tempCredentials =
           result && result.credentials && JSON.parse(result.credentials);
+        if (tempCredentials && tempCredentials.length > 0) {
+          tempCredentials.push(tempCurrentAssignment);
+        } else {
+          tempCredentials = [tempCurrentAssignment];
+        }
+        chrome.storage.local.set({
+          credentials: JSON.stringify(tempCredentials),
+        });
       });
+
       chrome.storage.local.get(["credentialNotification"]).then((result) => {
         tempNotifications =
           result &&
           result.credentialNotification &&
           JSON.parse(result.credentialNotification);
-      });
-      tempCredentials.push(tempCurrentAssignment);
-      for (let i = 0; i < tempNotifications.length; i++) {
-        if (
-          tempNotifications[i].credentialId === currentAssignment.credentialId
-        ) {
-          tempNotifications[i].status = "approved";
+        currentAssignment.status = "approved";
+        if (tempNotifications && tempNotifications.length > 0) {
+          for (let i = 0; i < tempNotifications.length; i++) {
+            if (
+              tempNotifications[i].credentialId ===
+              currentAssignment.credentialId
+            ) {
+              tempNotifications[i].status = "approved";
+            }
+          }
+        } else {
+          tempNotifications = [currentAssignment];
         }
-      }
-      console.log(tempNotifications);
-      chrome.storage.local.set({
-        credentialNotification: JSON.stringify(tempNotifications),
-      });
-      chrome.storage.local.set({
-        credentials: JSON.stringify(tempCredentials),
+
+        chrome.storage.local.set({
+          credentialNotification: JSON.stringify(tempNotifications),
+        });
       });
     });
   };
@@ -94,7 +109,34 @@
         },
         body: JSON.stringify(data),
       }
-    ).then((res) => {});
+    ).then((res) => {
+      goto("/activity");
+      let tempNotifications = [];
+      chrome.storage.local.get(["credentialNotification"]).then((result) => {
+        tempNotifications =
+          result &&
+          result.credentialNotification &&
+          JSON.parse(result.credentialNotification);
+        currentAssignment.status = "denied";
+        if (tempNotifications && tempNotifications.length > 0) {
+
+          for (let i = 0; i < tempNotifications.length; i++) {
+            if (
+              tempNotifications[i].credentialId ===
+              currentAssignment.credentialId
+            ) {
+              tempNotifications[i].status = "denied";
+            }
+          }
+        } else {
+          tempNotifications = [currentAssignment];
+        }
+
+        chrome.storage.local.set({
+          credentialNotification: JSON.stringify(tempNotifications),
+        });
+      });
+    });
   };
 </script>
 
@@ -128,7 +170,6 @@
           kind="ghost"
           on:click={() => {
             denyCredential();
-            goto("/listCredential");
           }}>Decline</Button
         >
       </div>
