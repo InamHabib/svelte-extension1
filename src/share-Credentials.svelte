@@ -16,7 +16,7 @@
     defaultDocumentLoader,
   } from "@digitalbazaar/vc";
   import customContext from "./customContext";
-  import {extendContextLoader} from 'jsonld-signatures';
+  import { extendContextLoader } from "jsonld-signatures";
   import { onMount } from "svelte";
   import { goto } from "svelte-pathfinder";
   import parseJwt from "./parseJWT";
@@ -72,44 +72,72 @@
   });
 
   async function submitPresentation() {
-    const id = tempCredentialRequest[0].requestId;
+    // const id = tempCredentialRequest[0].requestId;
     const holder = userInfo.holderDid;
-    const verifiableCredential = tempCredentialsFiltered[0].credentialDetail.vc;
-    const cryptoLd = new CryptoLD();
-
-    cryptoLd.use(Ed25519VerificationKey2020);
-    cryptoLd.use(X25519KeyAgreementKey2020);
-
-    let keyPair = await cryptoLd.generate({
-      type: "Ed25519VerificationKey2020",
-    });
-    keyPair.id = `${holder}${keyPair.fingerprint()}`; // See Key ID section
-    const controllerDoc = {
-      "@context": "https://client.did.kloudlearn.com/public/security-v2.jsonld",
-      id: holder,
-      assertionMethod: [keyPair.id],
+    // const verifiableCredential = tempCredentialsFiltered[0].credentialDetail.vc;
+    let tempSignedPresentation = {
+      "@context": ["https://www.w3.org/2018/credentials/v1"],
+      credentialSchema: {
+        id: "d31ce42d-dffc-4178-93bd-838757d3df5d",
+        type: "JsonSchemaValidator2018",
+      },
+      credentialSubject: {
+        epmPassword: "secret",
+        epmUsername: "muthu",
+        holderDID: holder,
+        holderId: "1",
+        id: "did:key:z6MkgaSuoabtP48y6ZwHMpUDDrUpfTn6Z2cqEhnPoHV3CGzC",
+      },
+      expirationDate: "2028-12-12T00:00:00Z",
+      id: "f8e394c8-e6b8-4a68-a452-9e36a2879c8a",
+      issuanceDate: "2023-03-01T08:38:17Z",
+      issuer: "did:key:z6MkgaSuoabtP48y6ZwHMpUDDrUpfTn6Z2cqEhnPoHV3CGzC",
+      type: ["VerifiableCredential"],
+      proof: {
+        type: "Ed25519Signature2018",
+        created: "2020-02-03T17:23:49Z",
+        jws: "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..AUQ3AJ23WM5vMOWNtYKuqZBekRAOUibOMH9XuvOd39my1sO-X9R4QyAXLD2ospssLvIuwmQVhJa-F0xMOnkvBg",
+        proofPurpose: "assertionMethod",
+        verificationMethod: "https://example.edu/issuers/keys/1",
+      },
     };
-    keyPair.controller = controllerDoc; // See Controller Document section
+    console.log(tempSignedPresentation, "Inam");
+    // const cryptoLd = new CryptoLD();
 
-    const suite = new Ed25519Signature2020({
-      verificationMethod: keyPair.id,
-      key: keyPair,
-    });
-    console.log(id, suite, holder, verifiableCredential);
-    const presentation = createPresentation({
-      verifiableCredential,
-      id,
-      holder,
-    });
-    const challenge = "authnull";
-    const documentLoader = extendContextLoader(async (url) => {
-      return {
-        contextUrl: null,
-        documentUrl: url,
-        document: customContext,
-      };
-    });
-    console.log(presentation, "Inam");
+    // cryptoLd.use(Ed25519VerificationKey2020);
+    // cryptoLd.use(X25519KeyAgreementKey2020);
+
+    // let keyPair = await cryptoLd.generate({
+    //   type: "Ed25519VerificationKey2020",
+    // });
+    // keyPair.id = `${holder}${keyPair.fingerprint()}`; // See Key ID section
+    // const controllerDoc = {
+    //   "@context": "https://client.did.kloudlearn.com/public/security-v2.jsonld",
+    //   id: holder,
+    //   assertionMethod: [keyPair.id],
+    // };
+    // keyPair.controller = controllerDoc; // See Controller Document section
+
+    // const suite = new Ed25519Signature2020({
+    //   verificationMethod: keyPair.id,
+    //   key: keyPair,
+    // });
+    // console.log(id, suite, holder, verifiableCredential);
+    // const presentation = createPresentation({
+    //   verifiableCredential,
+    //   id,
+    //   holder,
+    // });
+    // const challenge = "authnull";
+    // const documentLoader = defaultDocumentLoader
+    // // const documentLoader = extendContextLoader(async (url) => {
+    // //   return {
+    // //     contextUrl: "https://client.did.kloudlearn.com/public/security-v2.jsonld",
+    // //     documentUrl: url,
+    // //     document: customContext,
+    // //   };
+    // // });
+    // console.log(presentation, "Inam");
     // const vp = signPresentation({
     //   presentation,
     //   suite,

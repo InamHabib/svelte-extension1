@@ -123,24 +123,37 @@ async function pollCredentialRequest() {
               res.input_descriptors[0].constraints.fields;
             for (let i = 0; i < tempCredentialRequest.length; i++) {
               tempCredentialRequest[i].requestId = res.id;
+              tempCredentialRequest[i].presentationRequestId =
+                res.PresentationRequestId;
             }
+            chrome.storage.local.set({
+              credentialRequest: JSON.stringify(tempCredentialRequest),
+            });
+
+            chrome.notifications.create(
+              {
+                type: "basic",
+                iconUrl: "images/logo.png",
+                title: "Authnull",
+                message: `You have recieved a credential request`,
+                silent: false,
+              },
+              () => {
+                fetch(
+                  "https://api.did.kloudlearn.com/api/v1/walletService/acknowledgePresentationRequest",
+                  {
+                    method: "PUT", // or 'PUT'
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      presentationRequestId: res.PresentationRequestId,
+                    }),
+                  }
+                ).then((res) => {});
+              }
+            );
           }
-          console.log(tempCredentialRequest);
-
-          chrome.storage.local.set({
-            credentialRequest: JSON.stringify(tempCredentialRequest),
-          });
-
-          chrome.notifications.create(
-            {
-              type: "basic",
-              iconUrl: "images/logo.png",
-              title: "Authnull",
-              message: `You have recieved a credential request`,
-              silent: false,
-            },
-            () => {}
-          );
         })
         .catch((error) => {});
     }

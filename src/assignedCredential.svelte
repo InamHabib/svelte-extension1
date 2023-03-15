@@ -49,7 +49,7 @@
       }
     ).then((res) => {
       // Testing Only
-      goto("/listCredential");
+
       let tempCredentials;
       let tempNotifications = [];
       let tempCurrentAssignment = currentAssignment;
@@ -90,6 +90,7 @@
           credentialNotification: JSON.stringify(tempNotifications),
         });
       });
+      goto("/listCredential");
     });
   };
 
@@ -119,7 +120,6 @@
           JSON.parse(result.credentialNotification);
         currentAssignment.status = "denied";
         if (tempNotifications && tempNotifications.length > 0) {
-
           for (let i = 0; i < tempNotifications.length; i++) {
             if (
               tempNotifications[i].credentialId ===

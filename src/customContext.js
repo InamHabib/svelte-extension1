@@ -1,7 +1,7 @@
 const customContext = {
     "@context": [{
       "@version": 1.1
-    }, "https://w3id.org/security/v1", {
+    }, "https://client.did.kloudlearn.com/public/security-v1.jsonld", {
       "AesKeyWrappingKey2019": "sec:AesKeyWrappingKey2019",
       "DeleteKeyOperation": "sec:DeleteKeyOperation",
       "DeriveSecretOperation": "sec:DeriveSecretOperation",
