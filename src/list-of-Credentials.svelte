@@ -53,10 +53,10 @@
               <div
                 class="card"
                 on:click={() => {
-                  chrome.storage.local.set({
-                    credentialDetail: JSON.stringify(credential),
-                  });
-                  goto("/credential-detail");
+                  // chrome.storage.local.set({
+                  //   credentialDetail: JSON.stringify(credential),
+                  // });
+                  // goto("/credential-detail");
                 }}
               >
                 <div class="image-container">

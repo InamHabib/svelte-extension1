@@ -27,7 +27,7 @@
   import { X25519KeyAgreementKey2020 } from "@digitalbazaar/x25519-key-agreement-key-2020";
   let tempCredentials;
   let tempCredentialRequest;
-  let tempCredentialsFiltered = [];
+  let tempCredentialsFiltered;
   let userInfo;
   let fingerPrint;
   chrome.storage.local.get(["userInfo"]).then((result) => {
@@ -50,6 +50,7 @@
         }
 
         if (tempCredentialRequest) {
+          tempCredentialsFiltered = [];
           for (let i = 0; i < tempCredentialRequest.length; i++) {
             for (let j = 0; j < tempCredentials.length; j++) {
               if (
