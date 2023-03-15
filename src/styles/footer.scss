@@ -1,89 +1,85 @@
-body{
+body {
+  height: 576px;
+  width: 350px;
+  background-color: white !important ;
+  color: black !important;
+
+  .page-container {
     height: 576px;
     width: 350px;
-    background-color: white !important ; 
-    color: black !important;
-     
-    .page-container{
-        height: 576px;
-        width: 350px;
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-       
-        
-     .footer{
-        
-        display: flex;
-        flex-direction: column;
-        align-self: center;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
 
-        .bx--row{
-            margin-left: 0;
-            margin-right: 0;
-        }
+    .footer {
+      position: absolute;
+      bottom: 0;
+      left: 35%;
+      display: flex;
+      flex-direction: column;
+      align-self: center;
 
-        .footer-container{
-        
-            width: 100%;
+      .bx--row {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .footer-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-content: end;
+
+        .footer-tab {
+          padding: 0.5rem;
+          background-color: white;
+          border: 2px solid #cccc;
+          border-radius: 10px;
+          padding-left: 0 !important;
+
+          .sub-tab1 {
+            width: 38px;
+            height: 32px;
             display: flex;
-            justify-content: space-between;
-            align-content: end;
-        
-            .footer-tab{
-                
-                 padding: 0.5rem;
-                 background-color: white;
-                 border: 2px solid #cccc;
-                 border-radius: 10px;
-                 padding-left: 0 !important;
-            
-                .sub-tab1{
-                    width: 38px;
-                    height: 32px;
-                    display: flex;
-                    cursor: pointer;
-                    flex-direction: column;
-                    justify-content: space-evenly;
-                    color: #007AFF;
-                }
-                  
-                    p{
-                        color: white;
-                        margin-top: 52px;
-                        border-radius: 6px;
-                        padding: 1px;
-                        background-color: rgb(0,122,255);
-                        font-size: 10px;
-                        font-weight: 500;
-                    }
-                
-                .sub-tab2{
-                    h4{
-                        font-size: 14px;
-                        font-weight: 450;
-                        width: 150px;
-                    }
-                    span{
-                        font-size: 12px;
-                        color: rgba(60, 60, 67, 0.6);
-                        font-family: inter;
-                        font-style: normal;
-                        font-weight: 500;
-                    }
-                    p{
-                        color: #007AFF;
-                        font-size: 12px;
-                        font-family: inter;
-                        font-style: normal;
-                        font-weight: 350;
-                    }
-                }
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-evenly;
+            color: #007aff;
+          }
+
+          p {
+            color: white;
+            margin-top: 52px;
+            border-radius: 6px;
+            padding: 1px;
+            background-color: rgb(0, 122, 255);
+            font-size: 10px;
+            font-weight: 500;
+          }
+
+          .sub-tab2 {
+            h4 {
+              font-size: 14px;
+              font-weight: 450;
+              width: 150px;
             }
-        } 
-     }
-    
-
+            span {
+              font-size: 12px;
+              color: rgba(60, 60, 67, 0.6);
+              font-family: inter;
+              font-style: normal;
+              font-weight: 500;
+            }
+            p {
+              color: #007aff;
+              font-size: 12px;
+              font-family: inter;
+              font-style: normal;
+              font-weight: 350;
+            }
+          }
+        }
+      }
     }
-
+  }
 }

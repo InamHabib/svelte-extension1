@@ -77,6 +77,16 @@
             </Column>
           </Row>
         {/each}
+      {:else}
+        <div class="no-data">
+          <img
+            src="/images/noData.jpg"
+            width="60%"
+            height="auto"
+            style="margin-bottom:2rem;margin-top:2rem"
+          />
+          <h2>Currently no access is requested</h2>
+        </div>
       {/if}
     </Column>
   </Row>

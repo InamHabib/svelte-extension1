@@ -76,7 +76,8 @@
     const id = tempCredentialRequest[0].requestId;
     const holder = userInfo.holderDid;
     const verifiableCredential = tempCredentialsFiltered[0].credentialDetail.vc;
-    const presentationRequestId = tempCredentialRequest[0].presentationRequestId;
+    const presentationRequestId =
+      tempCredentialRequest[0].presentationRequestId;
     console.log(presentationRequestId);
     let walletId = userInfo.walletId;
     let tempSignedPresentation = {
@@ -108,10 +109,10 @@
     let data = {
       walletId: walletId,
       holderDid: holder,
-      presentationRequestId:presentationRequestId,
-      presentation:tempSignedPresentation
-    }
-    console.log(tempSignedPresentation, "Inam",verifiableCredential);
+      presentationRequestId: presentationRequestId,
+      presentation: tempSignedPresentation,
+    };
+    console.log(tempSignedPresentation, "Inam", verifiableCredential);
     fetch(
       "https://api.did.kloudlearn.com/api/v1/walletService/submitPresentation",
       {
@@ -122,8 +123,10 @@
         body: JSON.stringify(data),
       }
     ).then((res) => {
-      goto('/listCredential')
-    })
+      chrome.storage.local.remove(["credentialRequest"], function () {
+        goto("/listCredential");
+      });
+    });
     // const cryptoLd = new CryptoLD();
 
     // cryptoLd.use(Ed25519VerificationKey2020);
@@ -171,25 +174,57 @@
 </script>
 
 <div class="share-container">
-  <div class="top">
-    <h1>Share the following credentials</h1>
-    <h1>{tempCredentialsFiltered && tempCredentialsFiltered.length > 0 && tempCredentialsFiltered[0].credentialName}</h1>
-    <p>{tempCredentialsFiltered && tempCredentialsFiltered.length > 0 && tempCredentialsFiltered[0].credentialDetail.vc.credentialSubject.credentialType}</p>
-    <div class="image-container">
-      <img src="/images/share.svg" width="100px" height="100px" />
+  {#if tempCredentialsFiltered && tempCredentialsFiltered.length > 0}
+    <div class="top">
+      <h1>Share the following credentials</h1>
+      <h1>
+        {tempCredentialsFiltered &&
+          tempCredentialsFiltered.length > 0 &&
+          tempCredentialsFiltered[0].credentialName}
+      </h1>
+      <p>
+        {tempCredentialsFiltered &&
+          tempCredentialsFiltered.length > 0 &&
+          tempCredentialsFiltered[0].credentialDetail.vc.credentialSubject
+            .credentialType}
+      </p>
+      <div class="image-container">
+        <img src="/images/share.svg" width="100px" height="100px" />
+      </div>
     </div>
-  </div>
-  <div class="bottom">
-    <!-- <div class="image-container">
+    <div class="bottom">
+      <!-- <div class="image-container">
         <NotificationFilled size={64} />
     </div> -->
-    <h2>Press share if you would like to share these credentials</h2>
-    <h5>If you press accept the receiving resource will authenticate you</h5>
-    <div class="button-container">
-      <Button type="primary" on:click={() => submitPresentation()}
-        >Accept</Button
-      >
-      <Button kind="ghost" on:click={() => goto('/listCredential')}>Decline</Button>
+      <h2>Press share if you would like to share these credentials</h2>
+      <h5>If you press accept the receiving resource will authenticate you</h5>
+      <div class="button-container">
+        <Button type="primary" on:click={() => submitPresentation()}
+          >Accept</Button
+        >
+        <Button
+          kind="ghost"
+          on:click={() =>
+            chrome.storage.local.remove(["credentialRequest"], function () {
+              goto("/listCredential");
+            })}>Decline</Button
+        >
+      </div>
     </div>
-  </div>
+  {:else}
+    <Row>
+      <Column class="title-container">
+        <h1>Share Credentials</h1>
+      </Column>
+    </Row>
+    <div class="no-data">
+      <img
+        src="/images/noData.jpg"
+        width="60%"
+        height="auto"
+        style="margin-bottom:2rem;margin-top:2rem"
+      />
+      <h2>Currently no access is requested</h2>
+    </div>
+  {/if}
 </div>
