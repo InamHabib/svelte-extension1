@@ -69,6 +69,22 @@ async function pollCredential() {
                   ),
                 });
               });
+            let revert = {
+              walletId: userInfo.walletId,
+              userId: userInfo.userId,
+              credentialId: currentCredential.credentialId,
+              accept: false,
+            };
+            fetch(
+              "https://api.did.kloudlearn.com/api/v1/walletService/acknowledgeCredential",
+              {
+                method: "POST", // or 'PUT'
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(revert),
+              }
+            ).then((res) => {});
             chrome.notifications.create({
               type: "basic",
               iconUrl: "images/logo.png",

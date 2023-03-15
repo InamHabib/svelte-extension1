@@ -188,7 +188,7 @@
       <Button type="primary" on:click={() => submitPresentation()}
         >Accept</Button
       >
-      <Button kind="ghost">Decline</Button>
+      <Button kind="ghost" on:click={() => goto('/listCredential')}>Decline</Button>
     </div>
   </div>
 </div>
