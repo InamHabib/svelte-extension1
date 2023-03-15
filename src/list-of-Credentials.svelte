@@ -52,7 +52,12 @@
             <Column class="sub-tab2">
               <div
                 class="card"
-                on:click={() => goto("/credential-detail", { credential })}
+                on:click={() => {
+                  chrome.storage.local.set({
+                    credentialDetail: JSON.stringify(credential),
+                  });
+                  goto("/credential-detail");
+                }}
               >
                 <div class="image-container">
                   <img src="/images/share.svg" height="50px" width="50px" />

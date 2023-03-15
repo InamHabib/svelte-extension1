@@ -72,9 +72,12 @@
   });
 
   async function submitPresentation() {
-    // const id = tempCredentialRequest[0].requestId;
+    const id = tempCredentialRequest[0].requestId;
     const holder = userInfo.holderDid;
-    // const verifiableCredential = tempCredentialsFiltered[0].credentialDetail.vc;
+    const verifiableCredential = tempCredentialsFiltered[0].credentialDetail.vc;
+    const presentationRequestId = tempCredentialRequest[0].presentationRequestId;
+    console.log(presentationRequestId);
+    let walletId = userInfo.walletId;
     let tempSignedPresentation = {
       "@context": ["https://www.w3.org/2018/credentials/v1"],
       credentialSchema: {
@@ -83,14 +86,14 @@
       },
       credentialSubject: {
         epmPassword: "secret",
-        epmUsername: "muthu",
+        epmUsername: verifiableCredential.credentialSubject.epmUsername,
         holderDID: holder,
         holderId: "1",
-        id: "did:key:z6MkgaSuoabtP48y6ZwHMpUDDrUpfTn6Z2cqEhnPoHV3CGzC",
+        id: holder,
       },
       expirationDate: "2028-12-12T00:00:00Z",
       id: "f8e394c8-e6b8-4a68-a452-9e36a2879c8a",
-      issuanceDate: "2023-03-01T08:38:17Z",
+      issuanceDate: verifiableCredential.issuanceDate,
       issuer: "did:key:z6MkgaSuoabtP48y6ZwHMpUDDrUpfTn6Z2cqEhnPoHV3CGzC",
       type: ["VerifiableCredential"],
       proof: {
@@ -101,7 +104,25 @@
         verificationMethod: "https://example.edu/issuers/keys/1",
       },
     };
-    console.log(tempSignedPresentation, "Inam");
+    let data = {
+      walletId: walletId,
+      holderDid: holder,
+      presentationRequestId:presentationRequestId,
+      presentation:tempSignedPresentation
+    }
+    console.log(tempSignedPresentation, "Inam",verifiableCredential);
+    fetch(
+      "https://api.did.kloudlearn.com/api/v1/walletService/submitPresentation",
+      {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    ).then((res) => {
+      goto('/listCredential')
+    })
     // const cryptoLd = new CryptoLD();
 
     // cryptoLd.use(Ed25519VerificationKey2020);

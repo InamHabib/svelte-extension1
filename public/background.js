@@ -1,6 +1,6 @@
 chrome.alarms.create({
-  delayInMinutes: 0.17,
-  periodInMinutes: 0.17,
+  delayInMinutes: 0.03,
+  periodInMinutes: 0.03,
 });
 function parseJwt(token) {
   var base64Url = token.split(".")[1];
