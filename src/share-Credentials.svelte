@@ -172,8 +172,8 @@
 <div class="share-container">
   <div class="top">
     <h1>Share the following credentials</h1>
-    <h1>Server Group 1</h1>
-    <p>SSH Keys</p>
+    <h1>{tempCredentialsFiltered && tempCredentialsFiltered.length > 0 && tempCredentialsFiltered[0].credentialName}</h1>
+    <p>{tempCredentialsFiltered && tempCredentialsFiltered.length > 0 && tempCredentialsFiltered[0].credentialDetail.vc.credentialSubject.credentialType}</p>
     <div class="image-container">
       <img src="/images/share.svg" width="100px" height="100px" />
     </div>
